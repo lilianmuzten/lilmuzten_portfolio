@@ -1,6 +1,6 @@
 :root {
-  --bg: #0a0e1a;
-  --bg-alt: #0d1220;
+  --bg: #0a192f;
+  --bg-alt: #112240;
   --text-primary: #e8ecf5;
   --text-secondary: #8b93a7;
   --accent: #5eead4;
@@ -34,16 +34,24 @@ a {
 }
 
 /* ---------- NAV ---------- */
+/* .nav is the full-bleed background/border strip; .nav-inner caps the
+   actual content at the same width as the hero so the nav doesn't stretch
+   into a wide empty bar on large screens. */
 .nav {
   position: sticky;
   top: 0;
   z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
   padding: 1.5rem 3rem;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
 }
 
 .nav-left {
@@ -579,7 +587,7 @@ a {
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 720px) {
-  .nav {
+  .nav-inner {
     flex-wrap: wrap;
     gap: 1rem;
     padding: 1.25rem 1.5rem;
