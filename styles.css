@@ -389,36 +389,6 @@ a {
   margin: 0 0 1.25rem;
 }
 
-/* Same recipe as the (currently unused) hero .say-hi button: bordered pill,
-   icon + text, fills solid on hover. Pinned to the bottom of the card via
-   margin-top: auto, same trick .hobby-desc's flex:1 already sets up. */
-.hobby-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  width: fit-content;
-  margin-top: auto;
-  padding: 0.6rem 1.1rem;
-  border: 1px solid var(--accent);
-  border-radius: 8px;
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-weight: 600;
-  font-size: 0.85rem;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.hobby-cta svg {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-}
-
-.hobby-cta:hover {
-  background: var(--accent);
-  color: var(--bg);
-}
-
 /* ---------- EXPERIENCE (company tabs) ---------- */
 .accent {
   color: var(--accent);
