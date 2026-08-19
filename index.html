@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lilian</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=NTR&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-left">
+      <nav class="nav-tabs">
+        <a href="#home" class="nav-tab nav-name">Lilian Munoz</a>
+        <a href="#about" class="nav-tab">About</a>
+        <a href="#experience" class="nav-tab">Experience</a>
+        <a href="#hobbies" class="nav-tab">Hobbies</a>
+      </nav>
+    </div>
+    <div class="nav-center" aria-hidden="true">
+      <canvas class="nav-alien-icon" id="navAlienIcon" width="24" height="24"></canvas>
+    </div>
+    <div class="nav-icons">
+      <a href="mailto:liian.mztn@gmail.com" aria-label="Email" class="icon-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>
+      </a>
+      <a href="https://github.com/lilianmuzten" target="_blank" rel="noopener" aria-label="GitHub" class="icon-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.21.66.8.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/liliánmuñoz" target="_blank" rel="noopener" aria-label="LinkedIn" class="icon-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/datagirl_mx?igsh=aThlaWxyYzFtdmRm&igsi=aThlaWxyYzFtdmRm&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram" class="icon-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="hero" id="home">
+      <div class="portrait-wrap">
+        <canvas id="portrait" width="700" height="760" aria-label="Pixel-art portrait"></canvas>
+        <button
+          id="portraitToggle"
+          class="portrait-toggle"
+          type="button"
+          role="switch"
+          aria-checked="false"
+          title="Switch portrait style"
+        >
+          <span class="portrait-toggle-track">
+            <span class="portrait-toggle-thumb">
+              <canvas id="portraitToggleIcon" class="portrait-toggle-icon" width="24" height="24" aria-hidden="true"></canvas>
+            </span>
+          </span>
+          <span class="portrait-toggle-label">digit mode</span>
+        </button>
+      </div>
+
+      <div class="hero-text">
+        <h1 class="greeting">Hi, <span class="accent">Lil</span> here.<span class="cursor">|</span></h1>
+        <p class="subtext">
+          A Data Engineer who builds the invisible infrastructure that makes data trustworthy — pipelines, not spreadsheets.
+          AWS-native, I speak fluent PySpark and write SQL like a second language.
+          Lately I've been bringing Claude into the workflow — same rigor, faster iteration.
+        </p>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="content-section" id="about">
+      <div class="section-header">
+        <h2><span class="prompt">> </span> About me</h2>
+        <span class="divider"></span>
+      </div>
+      <div class="section-body">
+        <p>
+          A Data Engineer who builds the invisible infrastructure that makes data
+          trustworthy — pipelines, not spreadsheets. AWS-native, I speak fluent PySpark
+          and write SQL like a second language. Lately I've been bringing Claude into
+          the workflow — same rigor, faster iteration.
+        </p>
+        <p>
+          I am currently a Data Engineer at
+          <a href="https://www.wizeline.com/" target="_blank" rel="noopener" class="inline-link">Wizeline</a>,
+          where I build pipelines and data infrastructure for clients like Dow Jones and
+          Kellogg's, running on PySpark and AWS. Previously, I worked at
+          <a href="https://www.indragroup.com/es/america-latina/mexico" target="_blank" rel="noopener" class="inline-link">Indra</a>,
+          <a href="https://www.xaldigital.com/" target="_blank" rel="noopener" class="inline-link">XalDigital</a>, and
+          <a href="https://www.gob.mx/ineel" target="_blank" rel="noopener" class="inline-link">INEEL</a>,
+          where I cut my teeth migrating legacy systems into modern, cloud-native architectures.
+        </p>
+        <ul class="tag-list">
+          <li>PySpark</li>
+          <li>SQL</li>
+          <li>AWS</li>
+          <li>Airflow</li>
+          <li>Snowflake</li>
+          <li>Claude</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="content-section" id="experience">
+      <div class="section-header">
+        <h2><span class="prompt">> </span> Experience</h2>
+        <span class="divider"></span>
+      </div>
+      <div class="section-body">
+        <div class="experience-tabs">
+          <nav class="tabs-nav" role="tablist" aria-label="Companies">
+            <button class="tab-btn active" role="tab" aria-selected="true" data-target="wizeline">Wizeline</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-target="indra">Indra</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-target="xaldigital">XalDigital</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-target="bigdata4all">BigData4All</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-target="ineel">INEEL</button>
+          </nav>
+
+          <div class="tabs-panels">
+
+            <article class="tab-panel active" id="panel-wizeline" role="tabpanel">
+              <h3 class="panel-title">Senior Data Engineer @ <span class="accent">Wizeline</span></h3>
+              <p class="panel-dates">OCT 2021 — PRESENT · REMOTE</p>
+
+              <div class="panel-group">
+                <h4 class="panel-client">Dow Jones</h4>
+                <ul class="panel-bullets">
+                  <li>Developed reports with PySpark applying business logic and rules, deploying the final data in Athena tables for visualization.</li>
+                  <li>Identified, evaluated, and implemented process improvements, analyzing their impact on project outcomes.</li>
+                  <li>Migrated DAGs from regular Airflow to MWAA, improving efficiency and performance.</li>
+                  <li>Transitioned processes from EMR to EMR Serverless, enhancing scalability and reducing operational overhead and processing times.</li>
+                </ul>
+              </div>
+
+              <div class="panel-group">
+                <h4 class="panel-client">Kellogg's</h4>
+                <ul class="panel-bullets">
+                  <li>Led the project to optimize and adapt a web application for monitoring and managing financial sales information previously stored in an Excel spreadsheet.</li>
+                  <li>Served as the primary liaison with the client, coordinating a team of designers and developers and translating complex requirements for the team.</li>
+                </ul>
+              </div>
+
+              <div class="panel-group">
+                <h4 class="panel-client">Wizeline Academy</h4>
+                <ul class="panel-bullets">
+                  <li>Designed and created the learning path for the Data Engineering Apprenticeship.</li>
+                  <li>Worked on data modeling and optimizing the Apprenticeship final project — used by Wizeline to evaluate new Data team hires.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="tab-panel" id="panel-indra" role="tabpanel">
+              <h3 class="panel-title">Data Engineer @ <span class="accent">Indra</span></h3>
+              <p class="panel-dates">APR 2021 — OCT 2021 · REMOTE</p>
+              <ul class="panel-bullets">
+                <li>Migrated a process from Legacy to the Datio platform to build a data universe of delinquent contracts and customers.</li>
+                <li>Built unit and acceptance tests.</li>
+              </ul>
+            </article>
+
+            <article class="tab-panel" id="panel-xaldigital" role="tabpanel">
+              <h3 class="panel-title">Data Engineer @ <span class="accent">XalDigital</span></h3>
+              <p class="panel-dates">DEC 2018 — NOV 2020 · MEXICO CITY</p>
+              <ul class="panel-bullets">
+                <li>Worked on projects across retail and insurance.</li>
+                <li>Migrated an entire assortment planning process from Excel files to PySpark.</li>
+                <li>Automated ETL pipelines using AWS services.</li>
+                <li>Migrated SQL processes to PySpark to improve efficiency and scalability.</li>
+                <li>Led requirements gathering and business analysis to propose a Data Lake architecture on AWS.</li>
+                <li>Developed a proof of concept to generate product demand forecasts, architected on AWS.</li>
+                <li>Drafted functional and technical documentation for all processes contributed to.</li>
+              </ul>
+            </article>
+
+            <article class="tab-panel" id="panel-bigdata4all" role="tabpanel">
+              <h3 class="panel-title">Data Engineer @ <span class="accent">BigData4All</span></h3>
+              <p class="panel-dates">DEC 2017 — DEC 2018 · INTERLOMAS, EDO. MEX.</p>
+              <ul class="panel-bullets">
+                <li>Migrated SQL processes to PySpark to improve efficiency and scalability.</li>
+                <li>Automated ETL pipelines using AWS services.</li>
+                <li>Drafted functional and technical documentation for all processes contributed to.</li>
+              </ul>
+            </article>
+
+            <article class="tab-panel" id="panel-ineel" role="tabpanel">
+              <h3 class="panel-title">Software Engineer @ <span class="accent">INEEL</span></h3>
+              <p class="panel-dates">FEB 2017 — NOV 2017 · CUERNAVACA, MOR.</p>
+              <ul class="panel-bullets">
+
+              </ul>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOBBIES -->
+    <section class="content-section" id="hobbies">
+      <div class="section-header">
+        <h2><span class="prompt">> </span> Hobbies</h2>
+        <span class="divider"></span>
+      </div>
+      <div class="section-body">
+        <ul class="hobbies-grid">
+          <li class="hobby-card">
+            <div class="hobby-card-header">
+              <span class="hobby-icon-badge">
+                <img class="hobby-icon" src="assets/horse.gif" alt="" aria-hidden="true" />
+              </span>
+              <a class="hobby-link" href="https://www.instagram.com/sanacasioranch/?hl=es" target="_blank" rel="noopener" aria-label="Open Sana Casi Ranch on Instagram" title="Sana Casi Ranch on Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
+              </a>
+            </div>
+            <h3 class="hobby-title">Horseback riding</h3>
+            <p class="hobby-desc">Since I was a kid, I always wanted to be a horsewoman, but I didn't start taking horseback riding classes until March 2026 — it's been my favorite activity ever since.</p>
+          </li>
+          <li class="hobby-card">
+            <div class="hobby-card-header">
+              <span class="hobby-icon-badge">
+                <img class="hobby-icon" src="assets/book.gif" alt="" aria-hidden="true" />
+              </span>
+              <a class="hobby-link" href="https://www.amazon.com.mx/Mind-Gut-Connection-Conversation-Impacts-Choices/dp/0062376551/ref=sr_1_1?crid=7TGLIIBMNMPB&dib=eyJ2IjoiMSJ9.qzM8tKtAd5Ytuijvg_Pr-HQ3B3-2EKRTzSHOgPHqiKOkRihcgkY3CXRrSAfSc6PR_7fSUCzV0YKtaiHtW7WtOJNg8F_EnSyTbLtfX_Uk9BIMp3IilsD98x2j8d8fL8geUWp4i195fg-9uksp6JgGxTqSVib3v2AFy3icdtnSUDpi11eZWFAxdG0VlSTV1-dLSNiByrWMRk355HsF6ggKQmNPNdUHii6s2VZ7vjz9viEVZY_nzOJ86wzGrHW5uRzQnjnx2ogDMhDlc-c6RidEEq4gGaVblfT83P0Vxl73r0I.avl3-HIfdzg_FO0Div3hN3GMUz7uPEaK5b4rOS-9S4s&dib_tag=se&keywords=the+mind+gut+connection&qid=1787098640&sprefix=%2Caps%2C175&sr=8-1&ufe=app_do%3Aamzn1.fos.45030d3a-91a9-4303-890a-776dee9077c1" target="_blank" rel="noopener" aria-label="Open The Mind-Gut Connection on Amazon" title="The Mind-Gut Connection on Amazon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
+              </a>
+            </div>
+            <h3 class="hobby-title">Reading</h3>
+            <p class="hobby-desc">Currently reading "The Mind-Gut Connection" by Emeran Mayer, MD.</p>
+          </li>
+          <li class="hobby-card">
+            <div class="hobby-card-header">
+              <span class="hobby-icon-badge">
+                <img class="hobby-icon" src="assets/piano.gif" alt="" aria-hidden="true" />
+              </span>
+              <a class="hobby-link" href="https://youtu.be/hyJEKmoFQDs?si=bgPGfwkAUQcjrRdG" target="_blank" rel="noopener" aria-label="Open Piano Roadmap video" title="Piano Roadmap on YouTube">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
+              </a>
+            </div>
+            <h3 class="hobby-title">Piano</h3>
+            <p class="hobby-desc">From time to time I play the piano. I'm currently learning the technique through a YouTube channel called "Piano Roadmap".</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="ending-credits">
+      <div>Built by Lilian Muñoz, with Claude Code.</div>
+      <div>All rights reserved. ©</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
