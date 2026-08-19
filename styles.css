@@ -41,7 +41,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 3rem;
+  padding: 1rem 3rem;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
 }
@@ -582,7 +582,7 @@ a {
   .nav {
     flex-wrap: wrap;
     gap: 1rem;
-    padding: 1.25rem 1.5rem;
+    padding: 1rem 1.5rem;
   }
 
   .nav-left {
