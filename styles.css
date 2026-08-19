@@ -152,7 +152,7 @@ a {
 }
 
 #portrait {
-  width: min(420px, 80vw);
+  width: min(210px, 40vw);
   height: auto;
   display: block;
 }
@@ -403,24 +403,10 @@ a {
   margin-bottom: 1.1rem;
 }
 
-/* horse.gif and piano.gif are opaque (no transparency), so they'd otherwise
-   show a hard white rectangle against the dark card — the badge gives all
-   three a consistent, intentional-looking frame instead. */
-.hobby-icon-badge {
-  width: 56px;
-  height: 56px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px;
-  background: #f6f1e6;
-  border-radius: 12px;
-}
-
 .hobby-icon {
-  width: 100%;
-  height: 100%;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
   display: block;
   object-fit: contain;
   image-rendering: pixelated;
@@ -466,6 +452,17 @@ a {
   color: var(--text-secondary);
   letter-spacing: 0.03em;
   margin: auto 0 0;
+}
+
+.hobby-meta-link {
+  display: inline-block;
+  width: fit-content;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.hobby-meta-link:hover {
+  color: var(--accent);
 }
 
 /* ---------- EXPERIENCE (company tabs) ---------- */

@@ -9,7 +9,7 @@
 // contrast, so glasses/hair edges stand out) and both animate in the exact
 // same way — particles drift in from random offsets, fade in, then settle
 // into a gentle idle breathing motion — so switching either direction feels
-// consistent. Drop a photo in at assets/lil_photo.jpg (a plain background,
+// consistent. Drop a photo in at assets/lil_photo.jpeg (a plain background,
 // light or dark, works best) to use your own portrait. If it's missing or
 // fails to load, a procedural placeholder silhouette is sampled the same
 // way instead.
@@ -263,7 +263,7 @@
   const img = new Image();
   img.onload = () => sampleImage(img);
   img.onerror = drawPlaceholder;
-  img.src = "assets/lil_photo.jpg";
+  img.src = "assets/lil_photo.jpeg";
 
   // ---- Pixel-art alien: nav mascot + toggle thumb, one shared technique ----
   // Drawn with plain fillRect calls on a 12x12 base grid (scaled 2x to fill
