@@ -3,7 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lilian</title>
+  <title>Lilian Muñoz — Data Engineer</title>
+  <meta name="description" content="Lilian Muñoz — Data Engineer building the invisible infrastructure that makes data trustworthy. AWS-native, fluent in PySpark and SQL." />
+  <meta name="theme-color" content="#0a0e1a" />
+
+  <!-- Open Graph / Twitter card. og:url below assumes GitHub Pages on this
+       repo (lilianmuzten/lilmuzten_portfolio) — update once the real deployed
+       domain is confirmed. og:image reuses the real portrait photo since
+       there's no dedicated landscape (1200x630) social-card image yet; its
+       portrait aspect ratio is why twitter:card is "summary" rather than
+       "summary_large_image" below, which expects a landscape crop. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Lilian Muñoz — Data Engineer" />
+  <meta property="og:description" content="Data Engineer building the invisible infrastructure that makes data trustworthy. AWS-native, fluent in PySpark and SQL." />
+  <meta property="og:url" content="https://lilianmuzten.github.io/lilmuzten_portfolio/" />
+  <meta property="og:image" content="assets/lil_photo.jpeg" />
+  <meta property="og:image:width" content="836" />
+  <meta property="og:image:height" content="1280" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lilian Muñoz — Data Engineer" />
+  <meta name="twitter:description" content="Data Engineer building the invisible infrastructure that makes data trustworthy. AWS-native, fluent in PySpark and SQL." />
+  <meta name="twitter:image" content="assets/lil_photo.jpeg" />
+
+  <!-- Favicon: the same pixel-art alien used on the toggle/nav mascot -->
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=NTR&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
@@ -49,16 +76,10 @@
           id="portraitToggle"
           class="portrait-toggle"
           type="button"
-          role="switch"
-          aria-checked="false"
-          title="Switch portrait style"
+          title="Cycle portrait style"
+          aria-label="Cycle portrait style"
         >
-          <span class="portrait-toggle-track">
-            <span class="portrait-toggle-thumb">
-              <canvas id="portraitToggleIcon" class="portrait-toggle-icon" width="24" height="24" aria-hidden="true"></canvas>
-            </span>
-          </span>
-          <span class="portrait-toggle-label">digit mode</span>
+          <canvas id="portraitToggleIcon" class="portrait-toggle-icon" width="24" height="24" aria-hidden="true"></canvas>
         </button>
       </div>
 
@@ -213,7 +234,10 @@
             </div>
             <h3 class="hobby-title">Reading</h3>
             <p class="hobby-desc">Currently reading "The Mind-Gut Connection" by Emeran Mayer, MD.</p>
-            <a class="hobby-meta hobby-meta-link" href="https://www.amazon.com.mx/registries/gl/guest-view/4VPCZDT389SI?ref_=cm_sw_r_cp_ud_ggr-subnav-share_2D34GN945W4MQ2KXT7ZJ" target="_blank" rel="noopener" title="Add your Amazon gift book list link">Buy me a book →</a>
+            <a class="hobby-cta" href="https://www.amazon.com.mx/registries/gl/guest-view/4VPCZDT389SI?ref_=cm_sw_r_cp_ud_ggr-subnav-share_2D34GN945W4MQ2KXT7ZJ" target="_blank" rel="noopener" title="Add your Amazon gift book list link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              Buy me a book
+            </a>
           </li>
           <li class="hobby-card">
             <div class="hobby-card-header">
