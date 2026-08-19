@@ -1,6 +1,6 @@
 :root {
-  --bg: #0a0e1a;
-  --bg-alt: #0d1220;
+  --bg: #0a192f;
+  --bg-alt: #112240;
   --text-primary: #e8ecf5;
   --text-secondary: #8b93a7;
   --accent: #5eead4;
@@ -387,6 +387,30 @@ a {
   color: var(--text-secondary);
   line-height: 1.7;
   margin: 0 0 1.25rem;
+}
+
+/* Matches Gazi's .full-log-link (hardware section): plain text, no border/
+   box, arrow appended via ::after, slides right and lightens on hover. */
+.hobby-arrow-link {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin-top: auto;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.hobby-arrow-link::after {
+  content: "\2192";
+  margin-left: 0.4rem;
+  font-size: 1.1rem;
+}
+
+.hobby-arrow-link:hover {
+  color: var(--text-primary);
+  transform: translateX(5px);
 }
 
 /* ---------- EXPERIENCE (company tabs) ---------- */
