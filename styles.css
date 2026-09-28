@@ -151,17 +151,61 @@ a {
   gap: 0.9rem;
 }
 
-#portrait {
-  width: min(310px, 60vw);
-  height: auto;
-  display: block;
+/* Fixed-size stage the canvas and the real photo both fill exactly (see
+   .portrait-photo below), so the 1s crossfade between them is a straight
+   opacity swap in place — nothing shifts size or position underneath it. */
+.portrait-stage {
+  position: relative;
+  width: min(480px, 90vw);
+  aspect-ratio: 1 / 1;
 }
 
-/* ---------- PORTRAIT MODE CYCLE ---------- */
-/* Three render styles now (monet / digit / princess), cycled in that fixed
-   order by clicking the little pixel-art alien icon — just the icon itself,
-   no label text and no pill/track behind it. A quick spin gives click
-   feedback that the style changed. */
+#portrait {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: crosshair; /* the ASCII engine's mouse-repulsion cursor, see script.js */
+  touch-action: none;
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+.portrait-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  /* Matches the ASCII engine's own scale=0.8 contain-fit (see processImage
+     in script.js): a 10%-per-side inset shrinks the box object-fit actually
+     sizes into to 80%, so the subject renders at the same scale in both —
+     without this the plain photo (no inset) fills closer to 100% here,
+     reading as a size jump on every crossfade instead of a plain dissolve. */
+  padding: 10%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none; /* clicks/hover pass through to #portrait underneath */
+}
+
+.portrait-wrap.portrait-wrap--photo #portrait {
+  opacity: 0;
+}
+
+.portrait-wrap.portrait-wrap--photo .portrait-photo {
+  opacity: 1;
+}
+
+/* ---------- PORTRAIT MODE TOGGLE ---------- */
+/* Switches the portrait between the ASCII engine in script.js and the real
+   photo underneath it (see .portrait-wrap--photo above) by clicking the
+   little pixel-art alien icon — just the icon itself, no label text and no
+   pill/track behind it. A quick spin gives click feedback that the style
+   changed. This same markup/animation previously drove the deprecated
+   3-style (monet/digit/princess) cycle and the deprecated bubble-mosaic/
+   ASCII toggle; reused here rather than duplicated. */
 .portrait-toggle {
   all: unset;
   cursor: pointer;

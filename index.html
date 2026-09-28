@@ -71,13 +71,21 @@
   <main>
     <section class="hero" id="home">
       <div class="portrait-wrap">
-        <canvas id="portrait" width="700" height="760" aria-label="Pixel-art portrait"></canvas>
+        <div class="portrait-stage">
+          <canvas id="portrait" width="480" height="480" aria-label="ASCII particle portrait"></canvas>
+          <img id="portraitPhoto" class="portrait-photo" src="assets/lian_photo.jpeg" alt="Lilian Muñoz" />
+        </div>
+        <!-- Toggles the portrait between the ASCII particle engine in
+             script.js and the real photo underneath it (a 1s crossfade, see
+             styles.css's .portrait-photo/#portrait opacity transitions). The
+             earlier 3-style cycle and the bubble-mosaic engine this same
+             button used to also drive stay deprecated in script.js. -->
         <button
           id="portraitToggle"
           class="portrait-toggle"
           type="button"
-          title="Cycle portrait style"
-          aria-label="Cycle portrait style"
+          title="Show real photo"
+          aria-label="Show real photo"
         >
           <canvas id="portraitToggleIcon" class="portrait-toggle-icon" width="24" height="24" aria-hidden="true"></canvas>
         </button>
