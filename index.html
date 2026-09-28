@@ -43,15 +43,21 @@
     <div class="nav-left">
       <nav class="nav-tabs">
         <a href="#home" class="nav-tab nav-name">Lilian Muñoz</a>
-        <a href="#about" class="nav-tab">About</a>
-        <a href="#experience" class="nav-tab">Experience</a>
-        <a href="#hobbies" class="nav-tab">Hobbies</a>
+        <a href="#about" class="nav-tab" data-i18n="nav-about">About</a>
+        <a href="#experience" class="nav-tab" data-i18n="nav-experience">Experience</a>
+        <a href="#projects" class="nav-tab" data-i18n="nav-projects">Personal projects</a>
+        <a href="#hobbies" class="nav-tab" data-i18n="nav-hobbies">Hobbies</a>
       </nav>
     </div>
     <div class="nav-center" aria-hidden="true">
       <canvas class="nav-alien-icon" id="navAlienIcon" width="24" height="24"></canvas>
     </div>
     <div class="nav-icons">
+      <div class="lang-switch" role="group" aria-label="Switch language / Cambiar idioma / Changer de langue">
+        <button class="lang-switch-btn" type="button" data-lang="es" aria-pressed="false">ES</button>
+        <button class="lang-switch-btn active" type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button class="lang-switch-btn" type="button" data-lang="fr" aria-pressed="false">FR</button>
+      </div>
       <a href="mailto:liian.mztn@gmail.com" aria-label="Email" class="icon-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>
       </a>
@@ -92,11 +98,10 @@
       </div>
 
       <div class="hero-text">
-        <h1 class="greeting">Hi, <span class="accent">Lil</span> here. <span class="cursor">|</span></h1>
-        <p class="subtext">
-          A Data Engineer who builds the invisible infrastructure that makes data trustworthy — pipelines, not spreadsheets. <br>
-          AWS-native, I speak fluent PySpark and write SQL like a second language. <br>
-          Lately I've been bringing AI tools into the workflow — same rigor, faster iteration.
+        <h1 class="greeting"><span data-i18n="greeting">Hello, <br> It's <span class="accent">Lian</span> here.</span> <span class="cursor">|</span></h1>
+        <p class="subtext" data-i18n="subtext">
+          Data Engineer who builds the invisible infrastructure that makes data trustworthy — pipelines, not spreadsheets. <br>
+          AWS-native, I speak fluent PySpark and write SQL like a second language. Lately I've been bringing AI tools into the workflow — same rigor, faster iteration.
         </p>
       </div>
     </section>
@@ -104,11 +109,11 @@
     <!-- ABOUT -->
     <section class="content-section" id="about">
       <div class="section-header">
-        <h2><span class="prompt">> </span> About me</h2>
+        <h2><span class="prompt">> </span> <span data-i18n="about-heading">About me</span></h2>
         <span class="divider"></span>
       </div>
       <div class="section-body">
-        <p>
+        <p data-i18n="about-body">
           I am currently a Data Engineer at
           <a href="https://www.wizeline.com/" target="_blank" rel="noopener" class="inline-link">Wizeline</a>,
           where I build pipelines and data infrastructure for clients like Dow Jones and
@@ -126,13 +131,16 @@
           <li>Snowflake</li>
           <li>Claude</li>
         </ul>
+        <p data-i18n="about-leisure">
+          In my free time I like watching YouTube videos to practice and improve my French, reading about gut health, and horseback riding on weekends. My favorite app is Pinterest.
+        </p>
       </div>
     </section>
 
     <!-- EXPERIENCE -->
     <section class="content-section" id="experience">
       <div class="section-header">
-        <h2><span class="prompt">> </span> Experience</h2>
+        <h2><span class="prompt">> </span> <span data-i18n="experience-heading">Experience</span></h2>
         <span class="divider"></span>
       </div>
       <div class="section-body">
@@ -147,12 +155,12 @@
           <div class="tabs-panels">
 
             <article class="tab-panel active" id="panel-wizeline" role="tabpanel">
-              <h3 class="panel-title">Senior Data Engineer @ <span class="accent">Wizeline</span></h3>
-              <p class="panel-dates">OCT 2021 — PRESENT · REMOTE</p>
+              <h3 class="panel-title"><span data-i18n="wizeline-role">Senior Data Engineer</span> @ <span class="accent">Wizeline</span></h3>
+              <p class="panel-dates" data-i18n="wizeline-dates">OCT 2021 — PRESENT · REMOTE</p>
 
               <div class="panel-group">
                 <h4 class="panel-client">Dow Jones</h4>
-                <ul class="panel-bullets">
+                <ul class="panel-bullets" data-i18n="wizeline-dowjones-bullets">
                   <li>Developed reports with PySpark applying business logic and rules, deploying the final data in Athena tables for visualization.</li>
                   <li>Identified, evaluated, and implemented process improvements, analyzing their impact on project outcomes.</li>
                   <li>Migrated DAGs from regular Airflow to MWAA, improving efficiency and performance.</li>
@@ -162,7 +170,7 @@
 
               <div class="panel-group">
                 <h4 class="panel-client">Kellogg's</h4>
-                <ul class="panel-bullets">
+                <ul class="panel-bullets" data-i18n="wizeline-kelloggs-bullets">
                   <li>Led the project to optimize and adapt a web application for monitoring and managing financial sales information previously stored in an Excel spreadsheet.</li>
                   <li>Served as the primary liaison with the client, coordinating a team of designers and developers and translating complex requirements for the team.</li>
                 </ul>
@@ -170,7 +178,7 @@
 
               <div class="panel-group">
                 <h4 class="panel-client">Wizeline Academy</h4>
-                <ul class="panel-bullets">
+                <ul class="panel-bullets" data-i18n="wizeline-academy-bullets">
                   <li>Designed and created the learning path for the Data Engineering Apprenticeship.</li>
                   <li>Worked on data modeling and optimizing the Apprenticeship final project — used by Wizeline to evaluate new Data team hires.</li>
                 </ul>
@@ -178,18 +186,18 @@
             </article>
 
             <article class="tab-panel" id="panel-indra" role="tabpanel">
-              <h3 class="panel-title">Data Engineer @ <span class="accent">Indra</span></h3>
-              <p class="panel-dates">APR 2021 — OCT 2021 · REMOTE</p>
-              <ul class="panel-bullets">
+              <h3 class="panel-title"><span data-i18n="de-role">Data Engineer</span> @ <span class="accent">Indra</span></h3>
+              <p class="panel-dates" data-i18n="indra-dates">APR 2021 — OCT 2021 · REMOTE</p>
+              <ul class="panel-bullets" data-i18n="indra-bullets">
                 <li>Migrated a process from Legacy to the Datio platform to build a data universe of delinquent contracts and customers.</li>
                 <li>Built unit and acceptance tests.</li>
               </ul>
             </article>
 
             <article class="tab-panel" id="panel-xaldigital" role="tabpanel">
-              <h3 class="panel-title">Data Engineer @ <span class="accent">XalDigital</span></h3>
-              <p class="panel-dates">DEC 2018 — DEC 2020 · MEXICO CITY</p>
-              <ul class="panel-bullets">
+              <h3 class="panel-title"><span data-i18n="de-role">Data Engineer</span> @ <span class="accent">XalDigital</span></h3>
+              <p class="panel-dates" data-i18n="xaldigital-dates">DEC 2018 — DEC 2020 · MEXICO CITY</p>
+              <ul class="panel-bullets" data-i18n="xaldigital-bullets">
                 <li>Worked on projects across retail and insurance.</li>
                 <li>Migrated an entire assortment planning process from Excel files to PySpark.</li>
                 <li>Automated ETL pipelines using AWS services.</li>
@@ -201,9 +209,9 @@
             </article>
 
             <article class="tab-panel" id="panel-bigdata4all" role="tabpanel">
-              <h3 class="panel-title">Data Engineer @ <span class="accent">BigData4All</span></h3>
-              <p class="panel-dates">NOV 2017 — DEC 2018 · INTERLOMAS, EDO. MEX.</p>
-              <ul class="panel-bullets">
+              <h3 class="panel-title"><span data-i18n="de-role">Data Engineer</span> @ <span class="accent">BigData4All</span></h3>
+              <p class="panel-dates" data-i18n="bigdata4all-dates">NOV 2017 — DEC 2018 · INTERLOMAS, EDO. MEX.</p>
+              <ul class="panel-bullets" data-i18n="bigdata4all-bullets">
                 <li>Migrated SQL processes to PySpark to improve efficiency and scalability.</li>
                 <li>Automated ETL pipelines using AWS services.</li>
                 <li>Drafted functional and technical documentation for all processes contributed to.</li>
@@ -215,10 +223,82 @@
       </div>
     </section>
 
+    <!-- PERSONAL PROJECTS -->
+    <!-- Card 2 (Vintaz) and card 3 (WoW) are placeholders — swap each
+         project-link href, description and tag-list for the real repo. -->
+    <section class="content-section" id="projects">
+      <div class="section-header">
+        <h2><span class="prompt">> </span> <span data-i18n="projects-heading">Personal projects</span></h2>
+        <span class="divider"></span>
+      </div>
+      <div class="section-body">
+        <ul class="projects-grid">
+          <li class="project-card">
+            <div class="project-card-header">
+              <svg class="project-folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+              <div class="project-card-links">
+                <a href="https://github.com/lilianmuzten/lilmuzten_portfolio" target="_blank" rel="noopener" class="project-link" aria-label="View source on GitHub" title="View source on GitHub">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.21.66.8.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+                </a>
+                <a href="https://lilianmuzten.github.io/lilmuzten_portfolio/" target="_blank" rel="noopener" class="project-link" aria-label="Open live project" title="Open live project">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-title">Lian's Portfolio</h3>
+            <p class="project-desc" data-i18n="project1-desc">This site — a from-scratch personal portfolio with an interactive ASCII portrait engine, no framework and no build step.</p>
+            <ul class="tag-list project-tags">
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+            </ul>
+          </li>
+          <li class="project-card">
+            <div class="project-card-header">
+              <svg class="project-folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+              <div class="project-card-links">
+                <a href="https://github.com/lilianmuzten" target="_blank" rel="noopener" class="project-link" aria-label="View source on GitHub" title="View source on GitHub">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.21.66.8.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+                </a>
+                <a href="#" target="_blank" rel="noopener" class="project-link" aria-label="Open live project" title="Open live project">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-title">Vintaz</h3>
+            <p class="project-desc" data-i18n="project2-desc">Work in progress.</p>
+            <ul class="tag-list project-tags">
+              <li>Tech</li>
+              <li>Stack</li>
+            </ul>
+          </li>
+          <li class="project-card">
+            <div class="project-card-header">
+              <svg class="project-folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+              <div class="project-card-links">
+                <a href="https://github.com/lilianmuzten" target="_blank" rel="noopener" class="project-link" aria-label="View source on GitHub" title="View source on GitHub">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.21.66.8.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+                </a>
+                <a href="#" target="_blank" rel="noopener" class="project-link" aria-label="Open live project" title="Open live project">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-title">WoW - Who Owns Who</h3>
+            <p class="project-desc" data-i18n="project3-desc">Work in progress.</p>
+            <ul class="tag-list project-tags">
+              <li>Tech</li>
+              <li>Stack</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+
     <!-- HOBBIES -->
     <section class="content-section" id="hobbies">
       <div class="section-header">
-        <h2><span class="prompt">> </span> Hobbies</h2>
+        <h2><span class="prompt">> </span> <span data-i18n="hobbies-heading">Hobbies</span></h2>
         <span class="divider"></span>
       </div>
       <div class="section-body">
@@ -230,8 +310,8 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
               </a>
             </div>
-            <h3 class="hobby-title">Horseback riding</h3>
-            <p class="hobby-desc">Since I was a kid, I always wanted to be a horsewoman, but I didn't start taking horseback riding classes until March 2026 — it's been my favorite activity ever since.</p>
+            <h3 class="hobby-title" data-i18n="hobby-horse-title">Horseback riding</h3>
+            <p class="hobby-desc" data-i18n="hobby-horse-desc">Since I was a kid, I always wanted to be a horsewoman, but I didn't start taking horseback riding classes until March 2026 — it's been my favorite activity ever since.</p>
           </li>
           <li class="hobby-card">
             <div class="hobby-card-header">
@@ -240,9 +320,9 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
               </a>
             </div>
-            <h3 class="hobby-title">Reading</h3>
-            <p class="hobby-desc">Currently reading <a href="https://www.amazon.com.mx/Mind-Gut-Connection-Conversation-Impacts-Choices/dp/0062376551/ref=sr_1_1?crid=7TGLIIBMNMPB&dib=eyJ2IjoiMSJ9.qzM8tKtAd5Ytuijvg_Pr-HQ3B3-2EKRTzSHOgPHqiKOkRihcgkY3CXRrSAfSc6PR_7fSUCzV0YKtaiHtW7WtOJNg8F_EnSyTbLtfX_Uk9BIMp3IilsD98x2j8d8fL8geUWp4i195fg-9uksp6JgGxTqSVib3v2AFy3icdtnSUDpi11eZWFAxdG0VlSTV1-dLSNiByrWMRk355HsF6ggKQmNPNdUHii6s2VZ7vjz9viEVZY_nzOJ86wzGrHW5uRzQnjnx2ogDMhDlc-c6RidEEq4gGaVblfT83P0Vxl73r0I.avl3-HIfdzg_FO0Div3hN3GMUz7uPEaK5b4rOS-9S4s&dib_tag=se&keywords=the+mind+gut+connection&qid=1787098640&sprefix=%2Caps%2C175&sr=8-1&ufe=app_do%3Aamzn1.fos.45030d3a-91a9-4303-890a-776dee9077c1" target="_blank" rel="noopener" class="inline-link">"The Mind-Gut Connection"</a> by Emeran Mayer, MD.</p>
-            <a class="hobby-arrow-link" href="https://www.amazon.com.mx/registries/gl/guest-view/4VPCZDT389SI?ref_=cm_sw_r_cp_ud_ggr-subnav-share_2D34GN945W4MQ2KXT7ZJ" target="_blank" rel="noopener" title="Amazon gift book list">Buy me a book</a>
+            <h3 class="hobby-title" data-i18n="hobby-reading-title">Reading</h3>
+            <p class="hobby-desc" data-i18n="hobby-reading-desc">Currently reading <a href="https://www.amazon.com.mx/Mind-Gut-Connection-Conversation-Impacts-Choices/dp/0062376551/ref=sr_1_1?crid=7TGLIIBMNMPB&dib=eyJ2IjoiMSJ9.qzM8tKtAd5Ytuijvg_Pr-HQ3B3-2EKRTzSHOgPHqiKOkRihcgkY3CXRrSAfSc6PR_7fSUCzV0YKtaiHtW7WtOJNg8F_EnSyTbLtfX_Uk9BIMp3IilsD98x2j8d8fL8geUWp4i195fg-9uksp6JgGxTqSVib3v2AFy3icdtnSUDpi11eZWFAxdG0VlSTV1-dLSNiByrWMRk355HsF6ggKQmNPNdUHii6s2VZ7vjz9viEVZY_nzOJ86wzGrHW5uRzQnjnx2ogDMhDlc-c6RidEEq4gGaVblfT83P0Vxl73r0I.avl3-HIfdzg_FO0Div3hN3GMUz7uPEaK5b4rOS-9S4s&dib_tag=se&keywords=the+mind+gut+connection&qid=1787098640&sprefix=%2Caps%2C175&sr=8-1&ufe=app_do%3Aamzn1.fos.45030d3a-91a9-4303-890a-776dee9077c1" target="_blank" rel="noopener" class="inline-link">"The Mind-Gut Connection"</a> by Emeran Mayer, MD.</p>
+            <a class="hobby-arrow-link" href="https://www.amazon.com.mx/registries/gl/guest-view/4VPCZDT389SI?ref_=cm_sw_r_cp_ud_ggr-subnav-share_2D34GN945W4MQ2KXT7ZJ" target="_blank" rel="noopener" title="Amazon gift book list" data-i18n="hobby-buy-book">Buy me a book</a>
           </li>
           <li class="hobby-card">
             <div class="hobby-card-header">
@@ -251,8 +331,8 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
               </a>
             </div>
-            <h3 class="hobby-title">Piano</h3>
-            <p class="hobby-desc">From time to time I play the piano. I'm currently learning the technique through a YouTube channel called "Piano Roadmap".</p>
+            <h3 class="hobby-title" data-i18n="hobby-piano-title">Piano</h3>
+            <p class="hobby-desc" data-i18n="hobby-piano-desc">From time to time I play the piano. I'm currently learning the technique through a YouTube channel called "Piano Roadmap".</p>
           </li>
         </ul>
       </div>
@@ -261,8 +341,8 @@
 
   <footer class="site-footer">
     <div class="ending-credits">
-      <div>Built by Lilian Muñoz.</div>
-      <div>All rights reserved. ©</div>
+      <div data-i18n="footer-built">Built by Lilian Muñoz.</div>
+      <div data-i18n="footer-rights">All rights reserved. ©</div>
     </div>
   </footer>
 

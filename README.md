@@ -57,6 +57,9 @@ Deploy from a branch) — no CI workflow, no build step.
 ## Credits
 
 - Hobby icons: `book.gif`, `horse.gif`, `piano.gif` in `assets/`.
+- The ASCII portrait engine and several UI sizing/style details are adapted
+  from [Gazi Jarin](https://github.com/gazijarin)'s portfolio
+  (Gazi-portfolio/Gazi-V2), ported to plain JS/HTML with no React/build step.
 
 ---
 

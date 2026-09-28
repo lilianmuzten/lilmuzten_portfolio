@@ -97,6 +97,40 @@ a {
   color: var(--accent);
 }
 
+.lang-switch {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.lang-switch-btn {
+  all: unset;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 0.3rem 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.lang-switch-btn + .lang-switch-btn {
+  border-left: 1px solid var(--border);
+}
+
+.lang-switch-btn:hover {
+  color: var(--text-primary);
+}
+
+.lang-switch-btn.active {
+  color: var(--bg);
+  background: var(--accent);
+}
+
 /* ---------- NAV CENTER (decorative wandering alien) ---------- */
 .nav-center {
   flex: 1 1 auto;
@@ -298,7 +332,7 @@ a {
 
 .section-header h2 {
   font-family: var(--font-mono);
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 700;
   margin: 0;
   white-space: nowrap;
@@ -454,6 +488,91 @@ a {
 .hobby-arrow-link:hover {
   color: var(--text-primary);
   transform: translateX(5px);
+}
+
+/* ---------- PERSONAL PROJECTS ---------- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 2rem 1.75rem;
+  background: var(--surface);
+  border-radius: 16px;
+  transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  background: var(--surface-hover);
+}
+
+.project-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.1rem;
+}
+
+.project-folder-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.project-card-links {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.project-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.project-link svg {
+  width: 20px;
+  height: 20px;
+}
+
+.project-link:hover {
+  color: var(--accent);
+}
+
+.project-title {
+  font-family: var(--font-mono);
+  font-size: 1.5rem; /* 24px */
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.6rem;
+}
+
+.project-desc {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 1.125rem; /* 18px */
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0 0 1.25rem;
+}
+
+.project-tags {
+  margin-top: auto;
 }
 
 /* ---------- EXPERIENCE (company tabs) ---------- */
@@ -645,7 +764,8 @@ a {
     padding: 3rem 1.5rem;
   }
 
-  .hobbies-grid {
+  .hobbies-grid,
+  .projects-grid {
     grid-template-columns: 1fr;
   }
 }
