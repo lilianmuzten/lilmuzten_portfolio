@@ -391,8 +391,7 @@ a {
   image-rendering: pixelated;
 }
 
-/* Bordered square icon button, matching Gazi's open-link chip on its
-   /software cards rather than a bare icon. */
+/* Bordered square icon button (a small chip) rather than a bare icon. */
 .hobby-link {
   display: flex;
   align-items: center;
@@ -418,7 +417,7 @@ a {
 
 .hobby-title {
   font-family: var(--font-mono);
-  font-size: 1.5rem; /* 24px, matches Gazi's .card-title */
+  font-size: 1.5rem; /* 24px */
   font-weight: 700;
   color: var(--text-primary);
   margin: 0 0 0.6rem;
@@ -427,14 +426,14 @@ a {
 .hobby-desc {
   flex: 1;
   font-family: var(--font-mono);
-  font-size: 1.125rem; /* 18px, matches Gazi's .card-desc */
+  font-size: 1.125rem; /* 18px */
   color: var(--text-secondary);
   line-height: 1.7;
   margin: 0 0 1.25rem;
 }
 
-/* Matches Gazi's .full-log-link (hardware section): plain text, no border/
-   box, arrow appended via ::after, slides right and lightens on hover. */
+/* Plain text, no border/box, arrow appended via ::after, slides right and
+   lightens on hover. */
 .hobby-arrow-link {
   display: flex;
   align-items: center;
@@ -484,7 +483,7 @@ a {
   border-left: 2px solid transparent;
   color: var(--text-secondary);
   font-family: var(--font-mono);
-  font-size: 1rem; /* 16px, matches Gazi's .MuiTab-wrapper */
+  font-size: 1rem; /* 16px */
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 
@@ -523,8 +522,8 @@ a {
 }
 
 .panel-title {
-  font-family: var(--font-mono); /* matches Gazi's .joblist-job-title/-company */
-  font-size: 1.75rem; /* 28px, matches Gazi's .joblist-job-title/-company */
+  font-family: var(--font-mono);
+  font-size: 1.75rem; /* 28px */
   font-weight: 700;
   margin: 0 0 0.5rem;
 }
@@ -532,7 +531,7 @@ a {
 .panel-dates {
   font-family: var(--font-mono);
   color: var(--text-secondary);
-  font-size: 1.125rem; /* 18px, matches Gazi's .joblist-duration */
+  font-size: 1.125rem; /* 18px */
   letter-spacing: 0.06em;
   margin: 0 0 1.75rem;
 }
@@ -561,8 +560,8 @@ a {
 .panel-bullets li {
   position: relative;
   padding-left: 1.4rem;
-  font-family: var(--font-mono); /* matches Gazi's .job-description li */
-  font-size: 1.125rem; /* 18px, matches Gazi's .job-description li */
+  font-family: var(--font-mono);
+  font-size: 1.125rem; /* 18px */
   color: var(--text-secondary);
   line-height: 1.7;
 }

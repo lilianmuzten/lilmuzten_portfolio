@@ -475,21 +475,15 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
 // The sole active #portrait engine (the bubble-mosaic engine and its
 // toggle button further down are deprecated — see those blocks).
 //
-// Ported (ported, not copy-pasted — this project is plain JS/HTML with no
-// React/build step) from Gazi Jarin's portfolio, src/components/AsciiPortrait.jsx
-// (Gazi-portfolio/Gazi-V2). One fixed look: the source photo sampled into a
-// monospace ASCII density ramp (" .:-=+*#%@" sparse→dense). Particles drift
-// in from random offsets and fade in, then run a live mouse/touch physics
-// simulation — nearby particles get pushed away from the cursor/finger and
-// ease back to their resting cell, with a gentle idle "breathing" jitter
-// while the pointer is engaged (or during the first few seconds after
-// load). The pre-baked `asciiData` cache from the original component is
-// intentionally left out: it's a lookup keyed to Gazi's own profile.png at
-// his exact breakpoint sizes, meaningless for assets/lian_photo.jpeg — this
-// keeps only the live image-processing path (also the original component's
-// own fallback when that cache misses). Gazi's original also resized the
-// canvas itself per breakpoint; here the canvas is a fixed 480x480 buffer
-// (see index.html), left to CSS to scale down responsively.
+// One fixed look: the source photo sampled into a monospace ASCII density
+// ramp (" .:-=+*#%@" sparse→dense). Particles drift in from random offsets
+// and fade in, then run a live mouse/touch physics simulation — nearby
+// particles get pushed away from the cursor/finger and ease back to their
+// resting cell, with a gentle idle "breathing" jitter while the pointer is
+// engaged (or during the first few seconds after load). There's no
+// pre-baked per-size data cache — just a live image-processing pass — since
+// the canvas is a fixed 480x480 buffer (see index.html), left to CSS to
+// scale down responsively, so there's only ever one size to process.
 (function () {
   const canvas = document.getElementById("portrait");
   if (!canvas) return;
