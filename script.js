@@ -1315,7 +1315,7 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
       "nav-projects": "Proyectos personales",
       "nav-hobbies": "Pasatiempos",
 
-      "greeting": 'Hola, <br> aquí <span class="accent">Lian</span>.',
+      "greeting": 'Hola, <br> soy <span class="accent">Lian</span>...',
       "subtext": `
           Ingeniera de Datos que construye la infraestructura invisible que hace que los datos sean confiables — pipelines, no hojas de cálculo. <br>
           Nativa de AWS, hablo PySpark con fluidez y escribo SQL como un segundo idioma. Últimamente he estado incorporando herramientas de IA a mi flujo de trabajo — el mismo rigor, con una iteración más rápida.
@@ -1406,7 +1406,7 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
       "nav-projects": "Projets personnels",
       "nav-hobbies": "Loisirs",
 
-      "greeting": 'Coucou, <br> ici <span class="accent">Lian</span>.',
+      "greeting": 'Coucou, <br> je suis <span class="accent">Lian</span>...',
       "subtext": `
           Ingénieure de Données qui construit l'infrastructure invisible qui rend les données fiables — des pipelines, pas des feuilles de calcul. <br>
           Native AWS, je parle couramment PySpark et j'écris du SQL comme une seconde langue. Dernièrement, j'intègre des outils d'IA à mon flux de travail — la même rigueur, avec une itération plus rapide.
