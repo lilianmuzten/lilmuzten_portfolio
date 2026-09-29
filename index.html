@@ -38,6 +38,25 @@
 </head>
 <body>
 
+  <!-- Icon sprite sheet: the github/external-link/folder icons below each
+       repeat several times (nav + every hobby/project card) — defined once
+       here as <symbol>s and referenced via <use> so there's one copy of each
+       path to keep in sync instead of N. Sized/colored per instance by the
+       existing CSS (currentColor + each usage's own width/height class). -->
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+    <defs>
+      <symbol id="icon-github" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.21.66.8.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>
+      </symbol>
+      <symbol id="icon-external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/>
+      </symbol>
+      <symbol id="icon-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
+      </symbol>
+    </defs>
+  </svg>
+
   <!-- NAV -->
   <header class="nav">
     <div class="nav-left">
@@ -62,7 +81,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>
       </a>
       <a href="https://github.com/lilianmuzten" target="_blank" rel="noopener" aria-label="GitHub" class="icon-link">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.21.66.8.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+        <svg><use href="#icon-github"/></svg>
       </a>
       <a href="https://www.linkedin.com/in/liliánmuñoz" target="_blank" rel="noopener" aria-label="LinkedIn" class="icon-link">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
@@ -83,7 +102,7 @@
       <div class="portrait-wrap portrait-wrap--photo">
         <div class="portrait-stage">
           <canvas id="portrait" width="480" height="480" aria-label="ASCII particle portrait"></canvas>
-          <img id="portraitPhoto" class="portrait-photo" src="assets/lian_photo.jpeg" alt="Lilian Muñoz" />
+          <img id="portraitPhoto" class="portrait-photo" src="assets/lian_photo.jpeg" width="864" height="1266" alt="Lilian Muñoz" />
         </div>
       </div>
 
@@ -215,7 +234,9 @@
 
     <!-- PERSONAL PROJECTS -->
     <!-- Card 2 (Vintaz) and card 3 (WoW) are placeholders — swap each
-         project-link href, description and tag-list for the real repo. -->
+         project-link href, description and tag-list for the real repo, and
+         add back an "Open live project" link (see card 1 for the markup)
+         once each one actually has a live URL to point at. -->
     <section class="content-section" id="projects">
       <div class="section-header">
         <h2><span class="prompt">> </span> <span data-i18n="projects-heading">Personal projects</span></h2>
@@ -225,13 +246,13 @@
         <ul class="projects-grid">
           <li class="project-card">
             <div class="project-card-header">
-              <svg class="project-folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+              <svg class="project-folder-icon"><use href="#icon-folder"/></svg>
               <div class="project-card-links">
                 <a href="https://github.com/lilianmuzten/lilmuzten_portfolio" target="_blank" rel="noopener" class="project-link" aria-label="View source on GitHub" title="View source on GitHub">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.21.66.8.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+                  <svg><use href="#icon-github"/></svg>
                 </a>
                 <a href="https://lilianmuzten.github.io/lilmuzten_portfolio/" target="_blank" rel="noopener" class="project-link" aria-label="Open live project" title="Open live project">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
+                  <svg><use href="#icon-external-link"/></svg>
                 </a>
               </div>
             </div>
@@ -245,14 +266,12 @@
           </li>
           <li class="project-card">
             <div class="project-card-header">
-              <svg class="project-folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+              <svg class="project-folder-icon"><use href="#icon-folder"/></svg>
               <div class="project-card-links">
                 <a href="https://github.com/lilianmuzten" target="_blank" rel="noopener" class="project-link" aria-label="View source on GitHub" title="View source on GitHub">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.21.66.8.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+                  <svg><use href="#icon-github"/></svg>
                 </a>
-                <a href="#" target="_blank" rel="noopener" class="project-link" aria-label="Open live project" title="Open live project">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
-                </a>
+                <!-- "Open live project" link omitted until there's a real URL to point it at -->
               </div>
             </div>
             <h3 class="project-title">Vintaz</h3>
@@ -264,14 +283,12 @@
           </li>
           <li class="project-card">
             <div class="project-card-header">
-              <svg class="project-folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+              <svg class="project-folder-icon"><use href="#icon-folder"/></svg>
               <div class="project-card-links">
                 <a href="https://github.com/lilianmuzten" target="_blank" rel="noopener" class="project-link" aria-label="View source on GitHub" title="View source on GitHub">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.26 5.69.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.21.66.8.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+                  <svg><use href="#icon-github"/></svg>
                 </a>
-                <a href="#" target="_blank" rel="noopener" class="project-link" aria-label="Open live project" title="Open live project">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
-                </a>
+                <!-- "Open live project" link omitted until there's a real URL to point it at -->
               </div>
             </div>
             <h3 class="project-title">WoW - Who Owns Who</h3>
@@ -297,7 +314,7 @@
             <div class="hobby-card-header">
               <img class="hobby-icon" src="assets/horse.gif" alt="" aria-hidden="true" />
               <a class="hobby-link" href="https://www.instagram.com/sanacasioranch/?hl=es" target="_blank" rel="noopener" aria-label="Open San Acasio Ranch on Instagram" title="Check out my fav place!">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
+                <svg><use href="#icon-external-link"/></svg>
               </a>
             </div>
             <h3 class="hobby-title" data-i18n="hobby-horse-title">Horseback riding</h3>
@@ -307,7 +324,7 @@
             <div class="hobby-card-header">
               <img class="hobby-icon" src="assets/book.gif" alt="" aria-hidden="true" />
               <a class="hobby-link" href="https://www.goodreads.com/user/show/203638770" target="_blank" rel="noopener" aria-label="Open Goodreads profile" title="Check out my profile on Goodreads!">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
+                <svg><use href="#icon-external-link"/></svg>
               </a>
             </div>
             <h3 class="hobby-title" data-i18n="hobby-reading-title">Reading</h3>
@@ -318,7 +335,7 @@
             <div class="hobby-card-header">
               <img class="hobby-icon" src="assets/piano.gif" alt="" aria-hidden="true" />
               <a class="hobby-link" href="https://youtu.be/hyJEKmoFQDs?si=bgPGfwkAUQcjrRdG" target="_blank" rel="noopener" aria-label="Open Piano Roadmap video" title="Start learning to play the piano!">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
+                <svg><use href="#icon-external-link"/></svg>
               </a>
             </div>
             <h3 class="hobby-title" data-i18n="hobby-piano-title">Piano</h3>
@@ -336,6 +353,7 @@
     </div>
   </footer>
 
+  <script src="i18n.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
