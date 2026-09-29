@@ -1,6 +1,5 @@
 :root {
   --bg: #0a192f;
-  --bg-alt: #112240;
   --text-primary: #e8ecf5;
   --text-secondary: #8b93a7;
   --accent: #5eead4;
@@ -231,48 +230,6 @@ a {
 .portrait-wrap.portrait-wrap--photo .portrait-photo {
   opacity: 1;
 }
-
-/* ---------- PORTRAIT MODE TOGGLE (deprecated) ---------- */
-/* DEPRECATED: styled the click-to-toggle #portraitToggle button, superseded
-   by the hover-driven reveal (.portrait-wrap--photo toggled on
-   .portrait-stage mouseenter/mouseleave in script.js). Kept for reference —
-   the button markup is commented out in index.html.
-.portrait-toggle {
-  all: unset;
-  cursor: pointer;
-  box-sizing: border-box;
-  display: inline-flex;
-  align-items: center;
-}
-
-.portrait-toggle-icon {
-  width: 24px;
-  height: 24px;
-  display: block;
-  image-rendering: pixelated;
-  animation: portrait-toggle-pulse 1.8s ease-in-out infinite;
-  transition: filter 0.2s ease;
-}
-
-.portrait-toggle:hover .portrait-toggle-icon {
-  filter: drop-shadow(0 0 6px rgba(94, 234, 212, 0.6));
-}
-
-.portrait-toggle--spin .portrait-toggle-icon {
-  animation: portrait-toggle-pulse 1.8s ease-in-out infinite, portrait-toggle-spin 0.5s ease;
-}
-
-@keyframes portrait-toggle-spin {
-  0% { transform: rotate(0deg) scale(1); }
-  50% { transform: rotate(200deg) scale(1.15); }
-  100% { transform: rotate(360deg) scale(1); }
-}
-
-@keyframes portrait-toggle-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.55; }
-}
-*/
 
 .hero-text {
   flex: 1 1 420px;
