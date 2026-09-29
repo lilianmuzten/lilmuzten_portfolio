@@ -232,14 +232,11 @@ a {
   opacity: 1;
 }
 
-/* ---------- PORTRAIT MODE TOGGLE ---------- */
-/* Switches the portrait between the ASCII engine in script.js and the real
-   photo underneath it (see .portrait-wrap--photo above) by clicking the
-   little pixel-art alien icon — just the icon itself, no label text and no
-   pill/track behind it. A quick spin gives click feedback that the style
-   changed. This same markup/animation previously drove the deprecated
-   3-style (monet/digit/princess) cycle and the deprecated bubble-mosaic/
-   ASCII toggle; reused here rather than duplicated. */
+/* ---------- PORTRAIT MODE TOGGLE (deprecated) ---------- */
+/* DEPRECATED: styled the click-to-toggle #portraitToggle button, superseded
+   by the hover-driven reveal (.portrait-wrap--photo toggled on
+   .portrait-stage mouseenter/mouseleave in script.js). Kept for reference —
+   the button markup is commented out in index.html.
 .portrait-toggle {
   all: unset;
   cursor: pointer;
@@ -275,6 +272,7 @@ a {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.55; }
 }
+*/
 
 .hero-text {
   flex: 1 1 420px;

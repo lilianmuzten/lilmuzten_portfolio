@@ -720,6 +720,14 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
   draw();
 })();
 
+/* ----------------------------------------------------------------
+   DEPRECATED: click-to-toggle portrait mode (ASCII ↔ real photo).
+   Superseded by the hover-driven reveal right below — the photo is now
+   the resting state and hovering the stage is what reveals the ASCII
+   engine, so there's no click target to maintain here anymore. The
+   #portraitToggle button this drove is commented out in index.html.
+   ----------------------------------------------------------------
+
 // ---------- Portrait mode toggle: ASCII ↔ real photo ----------
 // Clicking the little pixel-art alien icon crossfades #portrait between the
 // ASCII particle engine above and the real photo sitting right underneath
@@ -752,6 +760,33 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
     toggleBtn.classList.add("portrait-toggle--spin");
     setTimeout(() => toggleBtn.classList.remove("portrait-toggle--spin"), 500);
   });
+})();
+
+   ---------------------------------------------------------------- */
+
+// ---------- Portrait: reveal ASCII engine on hover ----------
+// Resting state is the real photo (baked in as .portrait-wrap--photo on
+// .portrait-wrap in index.html, so there's no flash-of-ASCII before this
+// runs). Hovering the stage fades it out to reveal the live ASCII particle
+// engine underneath — same 1s crossfade the old click-toggle used, see
+// .portrait-photo / .portrait-wrap--photo in styles.css — and since the
+// engine keeps running unseen the whole time, the mouse-repulsion physics
+// (wired to #portrait itself, elsewhere in this file) is already live the
+// instant it fades in. Leaving the stage fades back to the photo.
+// touchstart/touchend mirror enter/leave for touch devices, which have no
+// hover state.
+(function () {
+  const wrap = document.querySelector(".portrait-wrap");
+  const stage = document.querySelector(".portrait-stage");
+  if (!wrap || !stage) return;
+
+  const showAscii = () => wrap.classList.remove("portrait-wrap--photo");
+  const showPhoto = () => wrap.classList.add("portrait-wrap--photo");
+
+  stage.addEventListener("mouseenter", showAscii);
+  stage.addEventListener("mouseleave", showPhoto);
+  stage.addEventListener("touchstart", showAscii, { passive: true });
+  stage.addEventListener("touchend", showPhoto);
 })();
 
 /* ================================================================

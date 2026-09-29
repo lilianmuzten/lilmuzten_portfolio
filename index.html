@@ -76,16 +76,17 @@
   <!-- HERO -->
   <main>
     <section class="hero" id="home">
-      <div class="portrait-wrap">
+      <!-- Resting state is the photo (portrait-wrap--photo baked in here so
+           there's no flash-of-ASCII on load); hovering .portrait-stage fades
+           to the live ASCII engine underneath and back out on leave — see
+           the "Portrait: reveal ASCII engine on hover" block in script.js. -->
+      <div class="portrait-wrap portrait-wrap--photo">
         <div class="portrait-stage">
           <canvas id="portrait" width="480" height="480" aria-label="ASCII particle portrait"></canvas>
           <img id="portraitPhoto" class="portrait-photo" src="assets/lian_photo.jpeg" alt="Lilian Muñoz" />
         </div>
-        <!-- Toggles the portrait between the ASCII particle engine in
-             script.js and the real photo underneath it (a 1s crossfade, see
-             styles.css's .portrait-photo/#portrait opacity transitions). The
-             earlier 3-style cycle and the bubble-mosaic engine this same
-             button used to also drive stay deprecated in script.js. -->
+        <!-- DEPRECATED: click-to-toggle button, superseded by the hover
+             reveal above — see the matching DEPRECATED block in script.js.
         <button
           id="portraitToggle"
           class="portrait-toggle"
@@ -95,6 +96,7 @@
         >
           <canvas id="portraitToggleIcon" class="portrait-toggle-icon" width="24" height="24" aria-hidden="true"></canvas>
         </button>
+        -->
       </div>
 
       <div class="hero-text">
