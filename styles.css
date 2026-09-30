@@ -77,9 +77,19 @@ a {
 
 /* Hamburger toggle for .nav-tabs — hidden above the mobile breakpoint
    (see the RESPONSIVE section), where .nav-tabs is always visible inline
-   instead. */
+   instead. `all: unset` is supposed to strip a <button>'s native chrome on
+   its own; -webkit-appearance/background/border/padding are set explicitly
+   too as defense in depth, since `all: unset` alone has a history of
+   inconsistent button-chrome handling across WebKit versions. */
 .nav-toggle {
   all: unset;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   display: none;
   flex-direction: column;
   justify-content: center;

@@ -18,5 +18,5 @@ jobs:
           node-version: 24
       - run: npm ci
       - run: npm run lint
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps chromium webkit
       - run: npm test

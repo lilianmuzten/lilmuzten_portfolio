@@ -1,15 +1,18 @@
 // Smoke test for this static site: serves the repo root over HTTP, drives it
-// in headless Chromium via Playwright, and asserts the handful of behaviors
-// that are easy to silently break (a stray <script> reorder, a class-name
-// typo, an i18n key mismatch) but that no build step would ever catch, since
-// there isn't one — see README.md. Run with `npm test`; exits non-zero and
-// prints the failing assertion on any mismatch, for CI.
+// in headless Chromium (desktop + mobile viewport) and WebKit (Safari's
+// engine, mobile viewport only — see section 7) via Playwright, and asserts
+// the handful of behaviors that are easy to silently break (a stray
+// <script> reorder, a class-name typo, an i18n key mismatch, a rendering
+// quirk one engine normalizes and another doesn't) but that no build step
+// would ever catch, since there isn't one — see README.md. Run with
+// `npm test`; exits non-zero and prints the failing assertion on any
+// mismatch, for CI.
 
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import { extname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { chromium } from "playwright";
+import { chromium, webkit } from "playwright";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const PORT = 8123;
@@ -151,7 +154,35 @@ async function main() {
 
   await mobile.close();
 
-  // 7. No console errors or uncaught exceptions across all of the above
+  // 7. Same mobile pass again, but in real WebKit (Safari's engine) rather
+  // than Chromium — a plain `all: unset` on a <button> has a history of
+  // inconsistent native-chrome handling across WebKit versions (see the
+  // comment on .nav-toggle in styles.css), and an iOS-only quirk wouldn't
+  // necessarily reproduce in this desktop build of WebKit either, but this
+  // is still a real second engine checking the same assertions.
+  const webkitBrowser = await webkit.launch();
+  const safari = await webkitBrowser.newPage({ viewport: { width: 375, height: 900 } });
+  safari.on("pageerror", (err) => consoleErrors.push("[webkit] " + String(err)));
+  safari.on("console", (msg) => {
+    if (msg.type() === "error") consoleErrors.push("[webkit] " + msg.text());
+  });
+  await safari.goto(`http://localhost:${PORT}/index.html`);
+  await safari.waitForTimeout(500);
+
+  const toggleBg = await safari.evaluate(() => getComputedStyle(document.getElementById("navToggle")).backgroundColor);
+  assert(
+    toggleBg === "rgba(0, 0, 0, 0)" || toggleBg === "transparent",
+    `expected #navToggle to have a transparent background in WebKit, got "${toggleBg}" (Safari's native <button> chrome showing through?)`
+  );
+
+  const barsOk = await safari.evaluate(() =>
+    [...document.querySelectorAll(".nav-toggle-bar")].every((bar) => bar.getBoundingClientRect().width > 0)
+  );
+  assert(barsOk, "expected all .nav-toggle-bar spans to have nonzero width in WebKit");
+
+  await webkitBrowser.close();
+
+  // 8. No console errors or uncaught exceptions across all of the above
   assert(consoleErrors.length === 0, `expected no console errors, got: ${consoleErrors.join(" | ")}`);
 
   await browser.close();
