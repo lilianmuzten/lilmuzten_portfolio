@@ -75,6 +75,40 @@ a {
   letter-spacing: 0.02em;
 }
 
+/* Hamburger toggle for .nav-tabs — hidden above the mobile breakpoint
+   (see the RESPONSIVE section), where .nav-tabs is always visible inline
+   instead. */
+.nav-toggle {
+  all: unset;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.nav-toggle-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--lilac);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
 .nav-icons {
   display: flex;
   align-items: center;
@@ -692,27 +726,72 @@ a {
 @media (max-width: 720px) {
   .nav {
     flex-wrap: wrap;
-    gap: 1rem;
-    padding: 1rem 1.5rem;
+    gap: 0.5rem 1rem;
+    padding: 1rem 1.25rem;
   }
 
   .nav-left {
-    gap: 1.25rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .nav-icons {
+    gap: 0.6rem;
+  }
+
+  /* .nav-tabs collapses into a dropdown under .nav-left, opened by
+     .nav-toggle (see script.js's "Mobile nav toggle" block). flex-basis:
+     100% drops it to its own line below the name+toggle row once open. */
+  .nav-toggle {
+    display: flex;
   }
 
   .nav-tabs {
-    flex-wrap: wrap;
-    gap: 0.6rem 1.25rem;
+    display: none;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    padding-top: 0.75rem;
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--border);
   }
 
+  .nav-tabs.nav-tabs--open {
+    display: flex;
+  }
+
+  .nav-tabs .nav-tab {
+    width: 100%;
+    padding: 0.5rem 0;
+  }
+
+  /* Hero: photo is secondary on a phone screen — show the greeting first
+     (order, not DOM order, so reading/tab order still goes photo-then-text)
+     and shrink the photo so the fold isn't just nav + half a face. */
   .hero {
-    padding: 3rem 1.5rem;
-    justify-content: center;
+    flex-direction: column;
+    padding: 2.5rem 1.5rem;
+    gap: 2rem;
     text-align: center;
   }
 
   .hero-text {
+    order: 1;
     text-align: left;
+  }
+
+  .portrait-wrap {
+    order: 2;
+  }
+
+  .portrait-stage {
+    width: min(260px, 60vw);
+  }
+
+  .section-header h2 {
+    font-size: 1.5rem;
+    white-space: normal;
   }
 
   .content-section {

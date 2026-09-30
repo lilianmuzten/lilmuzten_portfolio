@@ -431,3 +431,34 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
     btn.addEventListener("click", () => applyLang(btn.dataset.lang));
   });
 })();
+
+// ---------- Mobile nav toggle ----------
+// Below the mobile breakpoint, .nav-tabs collapses into a dropdown (see
+// styles.css) that this opens/closes. Above that breakpoint .nav-toggle is
+// hidden and .nav-tabs is always visible, so this is a no-op there.
+(function () {
+  const toggleBtn = document.getElementById("navToggle");
+  const navTabs = document.getElementById("navTabs");
+  if (!toggleBtn || !navTabs) return;
+
+  function setOpen(open) {
+    navTabs.classList.toggle("nav-tabs--open", open);
+    toggleBtn.setAttribute("aria-expanded", String(open));
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    setOpen(!navTabs.classList.contains("nav-tabs--open"));
+  });
+
+  // tapping a link closes the menu instead of leaving it open under the
+  // section it just scrolled to
+  navTabs.querySelectorAll(".nav-tab").forEach((link) => {
+    link.addEventListener("click", () => setOpen(false));
+  });
+
+  // resizing past the breakpoint (e.g. rotating a tablet, or a responsive
+  // check in devtools) shouldn't leave the dropdown stuck open
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 720) setOpen(false);
+  });
+})();

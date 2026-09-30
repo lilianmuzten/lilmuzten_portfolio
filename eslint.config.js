@@ -15,6 +15,7 @@ const browserGlobals = {
   cancelAnimationFrame: "readonly",
   setTimeout: "readonly",
   Image: "readonly",
+  getComputedStyle: "readonly",
 };
 
 export default [

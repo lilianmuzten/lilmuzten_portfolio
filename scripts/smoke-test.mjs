@@ -107,7 +107,51 @@ async function main() {
     `expected exactly the first project card to have a live-project link, got counts ${JSON.stringify(liveLinkCounts)}`
   );
 
-  // 6. No console errors or uncaught exceptions across all of the above
+  // 6. Mobile: no horizontal overflow, and the hamburger menu works. A
+  // narrow viewport is where a wide nav or an oversized hero photo pushes
+  // the page past its own width or buries the greeting below the fold —
+  // neither shows up at the 1400px width used above.
+  const mobile = await browser.newPage({ viewport: { width: 375, height: 900 } });
+  mobile.on("pageerror", (err) => consoleErrors.push(String(err)));
+  mobile.on("console", (msg) => {
+    if (msg.type() === "error") consoleErrors.push(msg.text());
+  });
+  await mobile.goto(`http://localhost:${PORT}/index.html`);
+  await mobile.waitForTimeout(500);
+
+  const mobileScrollWidth = await mobile.evaluate(() => document.documentElement.scrollWidth);
+  assert(mobileScrollWidth <= 375, `expected no horizontal overflow at 375px, got scrollWidth=${mobileScrollWidth}`);
+
+  const heroOrder = await mobile.evaluate(() => {
+    const text = document.querySelector(".hero-text").getBoundingClientRect();
+    const photo = document.querySelector(".portrait-wrap").getBoundingClientRect();
+    return text.top < photo.top;
+  });
+  assert(heroOrder, "expected the greeting to appear above the photo on a phone-width screen");
+
+  const tabsHiddenInitially = await mobile.evaluate(() => getComputedStyle(document.getElementById("navTabs")).display === "none");
+  assert(tabsHiddenInitially, "expected .nav-tabs to start collapsed on a phone-width screen");
+
+  const toggleVisible = await mobile.evaluate(() => getComputedStyle(document.getElementById("navToggle")).display !== "none");
+  assert(toggleVisible, "expected #navToggle (the hamburger button) to be visible on a phone-width screen");
+
+  if (toggleVisible) {
+    await mobile.click("#navToggle", { timeout: 2000 });
+    await mobile.waitForTimeout(150);
+    const tabsShownAfterToggle = await mobile.evaluate(() => getComputedStyle(document.getElementById("navTabs")).display !== "none");
+    assert(tabsShownAfterToggle, "expected .nav-tabs to open on #navToggle click");
+
+    if (tabsShownAfterToggle) {
+      await mobile.click("#navTabs .nav-tab", { timeout: 2000 });
+      await mobile.waitForTimeout(150);
+      const tabsHiddenAfterLinkClick = await mobile.evaluate(() => getComputedStyle(document.getElementById("navTabs")).display === "none");
+      assert(tabsHiddenAfterLinkClick, "expected .nav-tabs to close after clicking a link inside it");
+    }
+  }
+
+  await mobile.close();
+
+  // 7. No console errors or uncaught exceptions across all of the above
   assert(consoleErrors.length === 0, `expected no console errors, got: ${consoleErrors.join(" | ")}`);
 
   await browser.close();

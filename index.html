@@ -60,8 +60,16 @@
   <!-- NAV -->
   <header class="nav">
     <div class="nav-left">
-      <nav class="nav-tabs">
-        <a href="#home" class="nav-tab nav-name">Lilian Muñoz</a>
+      <a href="#home" class="nav-tab nav-name">Lilian Muñoz</a>
+      <!-- Hidden above the mobile breakpoint (see styles.css); below it,
+           .nav-tabs collapses into a dropdown this opens/closes — see the
+           "Mobile nav toggle" block in script.js. -->
+      <button id="navToggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="navTabs" aria-label="Toggle menu">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <nav class="nav-tabs" id="navTabs">
         <a href="#about" class="nav-tab" data-i18n="nav-about">About</a>
         <a href="#experience" class="nav-tab" data-i18n="nav-experience">Experience</a>
         <a href="#projects" class="nav-tab" data-i18n="nav-projects">Personal projects</a>
