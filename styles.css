@@ -699,19 +699,37 @@ a {
     gap: 1.5rem;
   }
 
+  /* One scrollable row instead of wrapping to multiple lines — there's no
+     room to show every company name at once on a phone, so this scrolls
+     horizontally (with momentum on iOS) instead of stacking. width: 100% +
+     min-width: 0 are both required: .experience-tabs's column layout
+     doesn't stretch cross-axis children by default, so without them this
+     sizes to its content (all 4 names unwrapped) and overflows the page
+     instead of scrolling within itself. */
   .tabs-nav {
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
     border-left: none;
     border-bottom: 1px solid var(--border);
     gap: 0.5rem;
   }
 
+  .tabs-nav::-webkit-scrollbar {
+    display: none;
+  }
+
   .tab-btn {
+    flex: 0 0 auto;
     border-left: none;
     border-bottom: 2px solid transparent;
     margin-left: 0;
     padding: 0.6rem 1rem;
+    white-space: nowrap;
   }
 
   .tab-btn.active {
@@ -796,7 +814,7 @@ a {
   }
 
   .portrait-stage {
-    width: min(260px, 60vw);
+    width: min(320px, 72vw);
   }
 
   .section-header h2 {
