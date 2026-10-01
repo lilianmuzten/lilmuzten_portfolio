@@ -128,9 +128,9 @@ async function main() {
   const heroOrder = await mobile.evaluate(() => {
     const text = document.querySelector(".hero-text").getBoundingClientRect();
     const photo = document.querySelector(".portrait-wrap").getBoundingClientRect();
-    return text.top < photo.top;
+    return photo.top < text.top;
   });
-  assert(heroOrder, "expected the greeting to appear above the photo on a phone-width screen");
+  assert(heroOrder, "expected the photo to appear above the greeting on a phone-width screen");
 
   const tabsHiddenInitially = await mobile.evaluate(() => getComputedStyle(document.getElementById("navTabs")).display === "none");
   assert(tabsHiddenInitially, "expected .nav-tabs to start collapsed on a phone-width screen");

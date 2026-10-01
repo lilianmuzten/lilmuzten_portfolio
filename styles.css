@@ -794,9 +794,9 @@ a {
     padding: 0.5rem 0;
   }
 
-  /* Hero: photo is secondary on a phone screen — show the greeting first
-     (order, not DOM order, so reading/tab order still goes photo-then-text)
-     and shrink the photo so the fold isn't just nav + half a face. */
+  /* Hero: stack vertically on a phone screen, photo first then the
+     greeting (matches the DOM/reading order already) — and shrink the
+     photo a bit so it isn't the whole first screen. */
   .hero {
     flex-direction: column;
     padding: 2.5rem 1.5rem;
@@ -805,12 +805,7 @@ a {
   }
 
   .hero-text {
-    order: 1;
     text-align: left;
-  }
-
-  .portrait-wrap {
-    order: 2;
   }
 
   .portrait-stage {
