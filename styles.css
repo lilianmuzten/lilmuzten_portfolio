@@ -284,7 +284,7 @@ a {
   font-size: clamp(2.4rem, 5vw, 3.4rem);
   font-weight: 700;
   margin: 0 0 1.5rem;
-  color: var(--text-primary);
+  color: var(--lilac);
 }
 
 .greeting .accent {
