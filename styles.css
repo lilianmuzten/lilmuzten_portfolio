@@ -5,6 +5,7 @@
   --accent: #5eead4;
   --lilac: #c9b6f2;
   --lilac-bright: #ddd0fa;
+  --lilac-muted: #a28fcd;
   --border: #1c2333;
   --surface: #131c30;
   --surface-hover: #1a2540;
@@ -335,6 +336,7 @@ a {
   font-weight: 700;
   margin: 0;
   white-space: nowrap;
+  color: var(--lilac-muted);
 }
 
 .divider {
