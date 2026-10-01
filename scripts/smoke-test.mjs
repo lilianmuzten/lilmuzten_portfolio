@@ -101,13 +101,13 @@ async function main() {
     assert(htmlLang === lang, `expected <html lang="${lang}">, got "${htmlLang}"`);
   }
 
-  // 5. Personal projects: live-project link only on the card that has one
+  // 5. Personal projects: every card has exactly one "Open live project" link
   const liveLinkCounts = await page.evaluate(() =>
     [...document.querySelectorAll(".project-card")].map((card) => card.querySelectorAll('a[aria-label="Open live project"]').length)
   );
   assert(
-    JSON.stringify(liveLinkCounts) === JSON.stringify([1, 0, 0]),
-    `expected exactly the first project card to have a live-project link, got counts ${JSON.stringify(liveLinkCounts)}`
+    JSON.stringify(liveLinkCounts) === JSON.stringify([1, 1, 1]),
+    `expected every project card to have exactly one live-project link, got counts ${JSON.stringify(liveLinkCounts)}`
   );
 
   // 6. Mobile: no horizontal overflow, and the hamburger menu works. A
