@@ -231,11 +231,24 @@ a {
 
 /* Fixed-size stage the canvas and the real photo both fill exactly (see
    .portrait-photo below), so the 1s crossfade between them is a straight
-   opacity swap in place — nothing shifts size or position underneath it. */
+   opacity swap in place — nothing shifts size or position underneath it.
+   The border below reads as an aged gold/brass frame — #portrait and
+   .portrait-photo are absolutely positioned with inset:0, which resolves
+   against the *padding* edge of this containing block, so the border sits
+   outside their content automatically, matting both the ASCII engine and
+   the real photo without a separate wrapper. */
 .portrait-stage {
   position: relative;
   width: min(480px, 90vw);
   aspect-ratio: 1 / 1;
+  border: 14px solid transparent;
+  border-image: linear-gradient(155deg, #e0c383 0%, #9c7a45 35%, #4a3018 55%, #cda862 75%, #87692f 100%) 1;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 2px rgba(255, 228, 170, 0.35),
+    inset 0 2px 6px rgba(0, 0, 0, 0.45),
+    0 25px 45px -15px rgba(0, 0, 0, 0.65),
+    0 10px 20px rgba(0, 0, 0, 0.35);
 }
 
 #portrait {
