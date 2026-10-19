@@ -238,21 +238,25 @@ a {
   aspect-ratio: 1 / 1;
 }
 
-/* A dashed frame in the ASCII engine's own teal, sized to the actual photo
-   content rather than the stage. Both #portrait and .portrait-photo contain-
-   fit into an 80%-of-stage square (10% inset — see processImage() in
-   script.js and .portrait-photo's padding below); lian_photo.jpeg is
-   portrait-oriented (864x1266), so within that square it only fills the
-   full HEIGHT, leaving empty space on the sides. 22.7% = 10% + half that
-   leftover horizontal space, so this sits flush with the real image edges
-   on all four sides instead of the emptier square around them. Tied to
-   this photo's aspect ratio — recompute if it's ever swapped for one with
-   a meaningfully different ratio. */
-.portrait-stage::after {
-  content: "";
+/* A snake-game frame: a canvas draws a ring of small teal dots flush with
+   the actual photo edges, and a short "snake" patrols it, eating one dot
+   per step (see the "Portrait: snake frame" block in script.js, which does
+   the same math this comment on the old dashed version explained — 10%
+   inset for the contain-fit box, 22.7% horizontal for lian_photo.jpeg's
+   864x1266 ratio leaving empty space on the sides within that box). */
+.frame-snake {
+  /* <canvas> is a *replaced* element (like <img>) — unlike a plain div,
+     it doesn't auto-stretch to fill an inset box; width/height:auto falls
+     back to its own intrinsic size (300x150 before script.js's resize()
+     ever runs) instead. Explicit left/top/width/height sidesteps that:
+     percentages on all four resolve against the same containing block
+     (.portrait-stage) regardless of element type, so this is the same box
+     "inset: 10% 22.7%" would have produced on a non-replaced element. */
   position: absolute;
-  inset: 10% 22.7%;
-  border: 2px dashed var(--accent);
+  left: 22.7%;
+  top: 10%;
+  width: 54.6%; /* 100% - 2 × 22.7% */
+  height: 80%; /* 100% - 2 × 10% */
   pointer-events: none;
 }
 

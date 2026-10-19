@@ -370,6 +370,110 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
   stage.addEventListener("touchend", showPhoto);
 })();
 
+// ---------- Portrait: snake frame ----------
+// A short snake patrols a ring of dots traced flush with the photo's own
+// edges (see .frame-snake in styles.css — the inset math is explained
+// there) and eats one dot per step, classic Snake but as a border instead
+// of a game board. Runs continuously regardless of which portrait mode is
+// showing, same as the ASCII engine itself.
+(function () {
+  const canvas = document.getElementById("frameSnake");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+
+  const DOT_SPACING = 14; // CSS px between dots along the perimeter
+  const DOT_SIZE = 3;
+  const SNAKE_LENGTH = 6;
+  const STEP_MS = 90; // time between moves — snake-speed, not frame-speed
+  const SNAKE_COLOR = "100, 255, 218"; // matches the ASCII engine's own particle color
+
+  let points = [];
+  let eaten = [];
+  let headIndex = 0;
+  let lastStep = 0;
+  let width = 0;
+  let height = 0;
+
+  // Walks the rectangle clockwise from the top-left corner, dropping a
+  // point roughly every DOT_SPACING px, so corners get a point too instead
+  // of being skipped by a fixed step count across the whole perimeter.
+  function buildPoints(w, h) {
+    const pts = [];
+    const addEdge = (x1, y1, x2, y2) => {
+      const dist = Math.hypot(x2 - x1, y2 - y1);
+      const steps = Math.max(1, Math.round(dist / DOT_SPACING));
+      for (let i = 0; i < steps; i++) {
+        const t = i / steps;
+        pts.push({ x: x1 + (x2 - x1) * t, y: y1 + (y2 - y1) * t });
+      }
+    };
+    addEdge(0, 0, w, 0);
+    addEdge(w, 0, w, h);
+    addEdge(w, h, 0, h);
+    addEdge(0, h, 0, 0);
+    return pts;
+  }
+
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+    width = rect.width;
+    height = rect.height;
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    points = buildPoints(width, height);
+    eaten = new Array(points.length).fill(false);
+    headIndex = points.length ? headIndex % points.length : 0;
+  }
+
+  function step() {
+    if (!points.length) return;
+    headIndex = (headIndex + 1) % points.length;
+    // a full lap eaten — respawn every dot and keep going
+    if (eaten.every(Boolean)) eaten.fill(false);
+    eaten[headIndex] = true;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    ctx.fillStyle = `rgba(${SNAKE_COLOR}, 0.55)`;
+    for (let i = 0; i < points.length; i++) {
+      if (eaten[i]) continue;
+      const p = points[i];
+      ctx.fillRect(p.x - DOT_SIZE / 2, p.y - DOT_SIZE / 2, DOT_SIZE, DOT_SIZE);
+    }
+
+    // body drawn tail-first so the head paints on top at each overlap
+    for (let i = SNAKE_LENGTH - 1; i >= 0; i--) {
+      const idx = (headIndex - i + points.length * 2) % points.length;
+      const p = points[idx];
+      if (!p) continue;
+      const isHead = i === 0;
+      const size = isHead ? DOT_SIZE * 2.2 : DOT_SIZE * 1.6;
+      const alpha = isHead ? 1 : 0.4 + 0.5 * (1 - i / SNAKE_LENGTH);
+      ctx.fillStyle = `rgba(${SNAKE_COLOR}, ${alpha.toFixed(2)})`;
+      ctx.fillRect(p.x - size / 2, p.y - size / 2, size, size);
+    }
+  }
+
+  function frame(now) {
+    requestAnimationFrame(frame);
+    if (!points.length) return;
+    if (now - lastStep >= STEP_MS) {
+      lastStep = now;
+      step();
+    }
+    draw();
+  }
+
+  resize();
+  window.addEventListener("resize", resize);
+  requestAnimationFrame(frame);
+})();
+
 // ---------- Experience tabs ----------
 (function () {
   const tabButtons = document.querySelectorAll(".tab-btn");
