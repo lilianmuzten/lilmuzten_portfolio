@@ -382,9 +382,9 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
   const ctx = canvas.getContext("2d");
 
   const DOT_SPACING = 14; // CSS px between dots along the perimeter
-  const DOT_SIZE = 3;
-  const SNAKE_LENGTH = 6;
-  const STEP_MS = 90; // time between moves — snake-speed, not frame-speed
+  const DOT_SIZE = 4;
+  const SNAKE_LENGTH = 7;
+  const STEP_MS = 75; // time between moves — snake-speed, not frame-speed
   const SNAKE_COLOR = "100, 255, 218"; // matches the ASCII engine's own particle color
 
   let points = [];
@@ -452,11 +452,15 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
       const p = points[idx];
       if (!p) continue;
       const isHead = i === 0;
-      const size = isHead ? DOT_SIZE * 2.2 : DOT_SIZE * 1.6;
+      const size = isHead ? DOT_SIZE * 2.6 : DOT_SIZE * 1.8;
       const alpha = isHead ? 1 : 0.4 + 0.5 * (1 - i / SNAKE_LENGTH);
       ctx.fillStyle = `rgba(${SNAKE_COLOR}, ${alpha.toFixed(2)})`;
+      // a small glow on the head so it reads as "lit up", not just a bigger dot
+      ctx.shadowColor = isHead ? `rgb(${SNAKE_COLOR})` : "transparent";
+      ctx.shadowBlur = isHead ? 8 : 0;
       ctx.fillRect(p.x - size / 2, p.y - size / 2, size, size);
     }
+    ctx.shadowBlur = 0;
   }
 
   function frame(now) {
