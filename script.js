@@ -579,7 +579,7 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
 
 // ---------- Wandering dogs ----------
 // Two GIF dogs roam the page, each on its own timer, moving one axis at a
-// time (walk left/right, jump up/down). They stay inside the band of the
+// time (walk left/right, jump up/down), and never over the portrait. They stay inside the band of the
 // page that's on screen below the sticky nav, and when scrolling settles
 // they jump over to whichever section is being viewed. Hovering shows the
 // dog's name; clicking shows a speech bubble with its bark in the page language. Skipped
@@ -639,6 +639,56 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
     return best;
   }
 
+  // ---- Keep the dogs off the portrait ----
+  // The ASCII portrait's box (with a small margin). A dog's footprint is its
+  // sprite plus LABEL_ROOM above it for the name/bark bubble.
+  function blockedRect() {
+    const stage = document.querySelector(".portrait-stage");
+    if (!stage) return null;
+    const r = stage.getBoundingClientRect();
+    const pad = 8;
+    return {
+      l: r.left + window.scrollX - pad,
+      r: r.right + window.scrollX + pad,
+      t: r.top + window.scrollY - pad,
+      b: r.bottom + window.scrollY + pad,
+    };
+  }
+
+  function hits(rect, x, y) {
+    return !!rect && x < rect.r && x + SIZE > rect.l && y + SIZE > rect.t && y - LABEL_ROOM < rect.b;
+  }
+
+  // Walking along a row from x to nx: stop at the portrait's edge instead of
+  // crossing it.
+  function clampX(x, y, nx) {
+    const rect = blockedRect();
+    if (!rect || !(y + SIZE > rect.t && y - LABEL_ROOM < rect.b)) return nx;
+    if (x + SIZE <= rect.l) return Math.min(nx, rect.l - SIZE);
+    if (x >= rect.r) return Math.max(nx, rect.r);
+    return nx;
+  }
+
+  // Jumping along a column from y to ny: stop short of the portrait.
+  function clampY(x, y, ny) {
+    const rect = blockedRect();
+    if (!rect || !(x < rect.r && x + SIZE > rect.l)) return ny;
+    if (y + SIZE <= rect.t) return Math.min(ny, rect.t - SIZE);
+    if (y - LABEL_ROOM >= rect.b) return Math.max(ny, rect.b + LABEL_ROOM);
+    return ny;
+  }
+
+  // Nearest x beside the portrait (left or right of it), or null if the page
+  // is too narrow to fit a dog there (phones).
+  function escapeX(x) {
+    const rect = blockedRect();
+    if (!rect) return null;
+    const maxX = Math.max(0, document.documentElement.clientWidth - SIZE);
+    const options = [rect.l - SIZE, rect.r].filter((v) => v >= 0 && v <= maxX);
+    if (!options.length) return null;
+    return options.reduce((a, b) => (Math.abs(a - x) <= Math.abs(b - x) ? a : b));
+  }
+
   const pack = dogs.map((dog) => {
     const el = document.createElement("div");
     el.className = "wanderer";
@@ -658,11 +708,16 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
     const [lo, hi] = visibleBand();
     const d = {
       el,
-      x: rand(0, Math.max(0, document.documentElement.clientWidth - SIZE)),
-      y: rand(lo, hi),
+      x: 0,
+      y: 0,
       facingLeft: false,
       timer: null,
     };
+    for (let tries = 0; tries < 50; tries++) {
+      d.x = rand(0, Math.max(0, document.documentElement.clientWidth - SIZE));
+      d.y = rand(lo, hi);
+      if (!hits(blockedRect(), d.x, d.y)) break;
+    }
 
     function place(seconds) {
       el.style.transitionDuration = `${seconds}s`;
@@ -672,20 +727,26 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
     }
 
     // One axis per move: walk along the current row, or jump straight to
-    // another row inside the visible band — never diagonally.
+    // another row inside the visible band — never diagonally, and never
+    // across the portrait.
     d.wander = function () {
+      // layout may have shifted under the dog (resize, language change)
+      if (hits(blockedRect(), d.x, d.y)) {
+        const ex = escapeX(d.x);
+        if (ex !== null) d.x = ex;
+      }
       let dist;
       let speed;
       if (Math.random() < 0.6) {
         const maxX = Math.max(0, document.documentElement.clientWidth - SIZE);
-        const nx = rand(0, maxX);
+        const nx = clampX(d.x, d.y, rand(0, maxX));
         dist = Math.abs(nx - d.x);
         speed = 30; // walking, px/s
         if (nx !== d.x) d.facingLeft = nx < d.x;
         d.x = nx;
       } else {
         const [bandLo, bandHi] = visibleBand();
-        const ny = Math.min(bandHi, Math.max(bandLo, d.y + rand(-300, 300)));
+        const ny = clampY(d.x, d.y, Math.min(bandHi, Math.max(bandLo, d.y + rand(-300, 300))));
         dist = Math.abs(ny - d.y);
         speed = 60; // jumping, px/s
         d.y = ny;
@@ -695,24 +756,45 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
       d.timer = setTimeout(d.wander, duration * 1000 + rand(800, 3500));
     };
 
-    // Scrolling settled: if this dog is outside the visible band, jump
-    // straight into it (fast, since the page may have moved far), then carry
-    // on wandering from there.
+    // Scroll moved the viewed section: if this dog is outside the visible
+    // band, walk into it, then carry on wandering from there. If the portrait
+    // is in the way, first walk out beside it, then go up/down.
     d.follow = function () {
       const [bandLo, bandHi] = visibleBand();
       if (d.y >= bandLo && d.y <= bandHi) return;
-      const from = d.y;
       window.clearTimeout(d.timer);
-      d.y = rand(bandLo, bandHi);
-      // walking pace, but capped so a long scroll never leaves a dog far behind
-      const duration = Math.min(4, Math.max(1.5, Math.abs(d.y - from) / 70));
-      place(duration);
-      el.style.transitionTimingFunction = "linear";
+      const target = rand(bandLo, bandHi);
+      const legs = [];
+      if (clampY(d.x, d.y, target) !== target) {
+        const ex = escapeX(d.x);
+        if (ex !== null) legs.push({ x: ex });
+      }
+      legs.push({ y: target });
+
       el.classList.add("wanderer--walking");
-      d.timer = setTimeout(() => {
-        el.classList.remove("wanderer--walking");
-        d.wander();
-      }, duration * 1000 + rand(500, 1500));
+      const runLeg = (i) => {
+        if (i === legs.length) {
+          el.classList.remove("wanderer--walking");
+          d.timer = setTimeout(d.wander, rand(500, 1500));
+          return;
+        }
+        let dist;
+        if (legs[i].x !== undefined) {
+          dist = Math.abs(legs[i].x - d.x);
+          d.facingLeft = legs[i].x < d.x;
+          d.x = legs[i].x;
+        } else {
+          const ny = clampY(d.x, d.y, legs[i].y);
+          dist = Math.abs(ny - d.y);
+          d.y = ny;
+        }
+        // walking pace, but capped so a long scroll never leaves a dog far behind
+        const duration = Math.min(3, Math.max(1.5, dist / 70));
+        place(duration);
+        el.style.transitionTimingFunction = "linear";
+        d.timer = setTimeout(() => runLeg(i + 1), duration * 1000);
+      };
+      runLeg(0);
     };
 
     let barkTimer = null;

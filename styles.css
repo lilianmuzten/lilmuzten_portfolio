@@ -1,3 +1,16 @@
+/* NTR has no accented letters, em dash or middle dot, so the browser borrows
+   them from the next font in --font-mono. Gudea is the closest match, but it
+   has a taller x-height and caps than NTR (0.50/0.70 vs 0.41/0.56 em), so it
+   is shrunk to 83% here to keep accented letters the same size as the rest.
+   Self-hosted because Google Fonts can't apply size-adjust. */
+@font-face {
+  font-family: "Gudea Adjusted";
+  src: url("assets/fonts/Gudea-latin.woff2") format("woff2");
+  font-display: swap;
+  size-adjust: 83%;
+  unicode-range: U+00A0-00FF, U+0152-0153, U+2013-2014;
+}
+
 :root {
   --bg: #0a192f;
   --text-primary: #e8ecf5;
@@ -10,7 +23,7 @@
   --surface: #131c30;
   --surface-hover: #1a2540;
   --font-serif: "Libre Baskerville", Georgia, "Times New Roman", serif;
-  --font-mono: "NTR", "Gudea", "JetBrains Mono", "Fira Code", "Courier New", Courier, monospace;
+  --font-mono: "NTR", "Gudea Adjusted", "JetBrains Mono", "Fira Code", "Courier New", Courier, monospace;
 }
 
 * {

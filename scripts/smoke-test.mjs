@@ -25,6 +25,7 @@ const CONTENT_TYPES = {
   ".jpg": "image/jpeg",
   ".png": "image/png",
   ".gif": "image/gif",
+  ".woff2": "font/woff2",
   ".ico": "image/x-icon",
 };
 
