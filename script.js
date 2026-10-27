@@ -345,6 +345,11 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
   draw();
 })();
 
+// DEPRECATED: the photo (and its hover crossfade to the ASCII engine) and the
+// snake frame were removed — the ASCII portrait is now always shown. Kept
+// commented out for reference; re-enable together with the matching markup
+// in index.html and rules in styles.css.
+/*
 // ---------- Portrait: reveal ASCII engine on hover ----------
 // Resting state is the real photo (baked in as .portrait-wrap--photo on
 // .portrait-wrap in index.html, so there's no flash-of-ASCII before this
@@ -477,6 +482,7 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
   window.addEventListener("resize", resize);
   requestAnimationFrame(frame);
 })();
+*/
 
 // ---------- Experience tabs ----------
 (function () {
@@ -569,4 +575,175 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
   window.addEventListener("resize", () => {
     if (window.innerWidth > 720) setOpen(false);
   });
+})();
+
+// ---------- Wandering dogs ----------
+// Two GIF dogs roam the page, each on its own timer, moving one axis at a
+// time (walk left/right, jump up/down). They stay inside the band of the
+// page that's on screen below the sticky nav, and when scrolling settles
+// they jump over to whichever section is being viewed. Hovering shows the
+// dog's name; clicking shows a speech bubble with its bark in the page language. Skipped
+// for users who prefer reduced motion.
+(function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const dogs = [
+    { name: "Bebocho", src: "assets/Bebocho.gif" },
+    { name: "Chirrin", src: "assets/Chirrin.gif" },
+  ];
+  const BARKS = { en: "woof", es: "guau", fr: "ouah" };
+  const GROWL = "grrr"; // easter egg: three quick clicks, same in every language
+  const GROWL_CLICKS = 3;
+  const CLICK_WINDOW_MS = 1500; // max gap between clicks that still count as a streak
+  const SIZE = 64;
+  const LABEL_ROOM = 36; // space kept above a dog for its name label / bark bubble
+  const nav = document.querySelector(".nav");
+  const sections = Array.from(document.querySelectorAll("main section"));
+
+  function rand(min, max) {
+    return min + Math.random() * (max - min);
+  }
+
+  // Vertical range (document coords) a dog may occupy right now: the part of
+  // the viewed section that's on screen, below the nav, with room for the
+  // label above and the sprite fully inside the viewport.
+  function visibleBand() {
+    const navH = nav ? nav.offsetHeight : 0;
+    let lo = window.scrollY + navH + LABEL_ROOM;
+    let hi = window.scrollY + window.innerHeight - SIZE;
+    const sec = currentSection();
+    if (sec) {
+      const top = sec.offsetTop;
+      const bottom = top + sec.offsetHeight - SIZE;
+      if (Math.max(lo, top) <= Math.min(hi, bottom)) {
+        lo = Math.max(lo, top);
+        hi = Math.min(hi, bottom);
+      }
+    }
+    hi = Math.min(hi, document.documentElement.scrollHeight - SIZE);
+    return [lo, Math.max(lo, hi)];
+  }
+
+  // The section with the most pixels inside the viewport.
+  function currentSection() {
+    let best = null;
+    let bestVisible = 0;
+    sections.forEach((sec) => {
+      const r = sec.getBoundingClientRect();
+      const visible = Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0);
+      if (visible > bestVisible) {
+        bestVisible = visible;
+        best = sec;
+      }
+    });
+    return best;
+  }
+
+  const pack = dogs.map((dog) => {
+    const el = document.createElement("div");
+    el.className = "wanderer";
+    el.tabIndex = 0;
+    const img = document.createElement("img");
+    img.src = dog.src;
+    img.alt = dog.name;
+    img.draggable = false;
+    const label = document.createElement("span");
+    label.className = "wanderer-name";
+    label.textContent = dog.name;
+    const bubble = document.createElement("span");
+    bubble.className = "wanderer-bubble";
+    el.append(img, label, bubble);
+    document.body.appendChild(el);
+
+    const [lo, hi] = visibleBand();
+    const d = {
+      el,
+      x: rand(0, Math.max(0, document.documentElement.clientWidth - SIZE)),
+      y: rand(lo, hi),
+      facingLeft: false,
+      timer: null,
+    };
+
+    function place(seconds) {
+      el.style.transitionDuration = `${seconds}s`;
+      el.style.transitionTimingFunction = "";
+      el.style.transform = `translate(${d.x}px, ${d.y}px)`;
+      img.style.setProperty("--flip", d.facingLeft ? -1 : 1);
+    }
+
+    // One axis per move: walk along the current row, or jump straight to
+    // another row inside the visible band — never diagonally.
+    d.wander = function () {
+      let dist;
+      let speed;
+      if (Math.random() < 0.6) {
+        const maxX = Math.max(0, document.documentElement.clientWidth - SIZE);
+        const nx = rand(0, maxX);
+        dist = Math.abs(nx - d.x);
+        speed = 30; // walking, px/s
+        if (nx !== d.x) d.facingLeft = nx < d.x;
+        d.x = nx;
+      } else {
+        const [bandLo, bandHi] = visibleBand();
+        const ny = Math.min(bandHi, Math.max(bandLo, d.y + rand(-300, 300)));
+        dist = Math.abs(ny - d.y);
+        speed = 60; // jumping, px/s
+        d.y = ny;
+      }
+      const duration = Math.max(2, dist / speed);
+      place(duration);
+      d.timer = setTimeout(d.wander, duration * 1000 + rand(800, 3500));
+    };
+
+    // Scrolling settled: if this dog is outside the visible band, jump
+    // straight into it (fast, since the page may have moved far), then carry
+    // on wandering from there.
+    d.follow = function () {
+      const [bandLo, bandHi] = visibleBand();
+      if (d.y >= bandLo && d.y <= bandHi) return;
+      const from = d.y;
+      window.clearTimeout(d.timer);
+      d.y = rand(bandLo, bandHi);
+      const duration = Math.max(3, Math.abs(d.y - from) / 70); // walking pace
+      place(duration);
+      el.style.transitionTimingFunction = "linear";
+      el.classList.add("wanderer--walking");
+      d.timer = setTimeout(() => {
+        el.classList.remove("wanderer--walking");
+        d.wander();
+      }, duration * 1000 + rand(500, 1500));
+    };
+
+    let barkTimer = null;
+    let clicks = 0;
+    let lastClick = 0;
+    el.addEventListener("click", () => {
+      const now = Date.now();
+      clicks = now - lastClick <= CLICK_WINDOW_MS ? clicks + 1 : 1;
+      lastClick = now;
+      const growl = clicks >= GROWL_CLICKS;
+      if (growl) clicks = 0;
+      bubble.textContent = growl ? GROWL : BARKS[document.documentElement.lang] || BARKS.en;
+      el.classList.toggle("wanderer--growl", growl);
+      el.classList.add("wanderer--bark");
+      window.clearTimeout(barkTimer);
+      barkTimer = setTimeout(() => {
+        el.classList.remove("wanderer--bark");
+      }, 1200);
+    });
+
+    place(0);
+    d.timer = setTimeout(d.wander, rand(300, 2500));
+    return d;
+  });
+
+  let scrollTimer = null;
+  window.addEventListener(
+    "scroll",
+    () => {
+      window.clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => pack.forEach((d) => d.follow()), 200);
+    },
+    { passive: true }
+  );
 })();

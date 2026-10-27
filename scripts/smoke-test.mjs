@@ -69,19 +69,16 @@ async function main() {
   const translationsType = await page.evaluate(() => typeof TRANSLATIONS);
   assert(translationsType === "object", `TRANSLATIONS should be an object, got ${translationsType}`);
 
-  // 2. Portrait: resting state is the photo, hovering reveals the ASCII engine
-  const initialClass = await page.evaluate(() => document.querySelector(".portrait-wrap").className);
-  assert(initialClass.includes("portrait-wrap--photo"), `expected photo to be the resting state, got class="${initialClass}"`);
-
-  await page.hover(".portrait-stage");
-  await page.waitForTimeout(1200); // the 1s crossfade
-  const hoveredClass = await page.evaluate(() => document.querySelector(".portrait-wrap").className);
-  assert(!hoveredClass.includes("portrait-wrap--photo"), `expected the ASCII engine to show on hover, got class="${hoveredClass}"`);
-
-  await page.mouse.move(5, 5); // move off the stage
-  await page.waitForTimeout(1200);
-  const leftClass = await page.evaluate(() => document.querySelector(".portrait-wrap").className);
-  assert(leftClass.includes("portrait-wrap--photo"), `expected the photo back after leaving the stage, got class="${leftClass}"`);
+  // 2. Portrait: the ASCII canvas is always shown; the photo and the snake
+  // frame were removed
+  const portrait = await page.evaluate(() => ({
+    photo: !!document.getElementById("portraitPhoto"),
+    snake: !!document.getElementById("frameSnake"),
+    wrapClass: document.querySelector(".portrait-wrap").className,
+    canvasOpacity: getComputedStyle(document.getElementById("portrait")).opacity,
+  }));
+  assert(!portrait.photo && !portrait.snake, "expected the portrait photo and snake frame to be gone");
+  assert(portrait.canvasOpacity === "1", `expected the ASCII canvas visible, got opacity ${portrait.canvasOpacity}`);
 
   // 3. Icon sprite: symbols exist and are actually referenced
   const spriteOk = await page.evaluate(() =>

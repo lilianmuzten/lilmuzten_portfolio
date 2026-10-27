@@ -238,27 +238,11 @@ a {
   aspect-ratio: 1 / 1;
 }
 
-/* A snake-game frame: a canvas draws a ring of small teal dots flush with
-   the actual photo edges, and a short "snake" patrols it, eating one dot
-   per step (see the "Portrait: snake frame" block in script.js, which does
-   the same math this comment on the old dashed version explained — 10%
-   inset for the contain-fit box, 22.7% horizontal for lian_photo.jpeg's
-   864x1266 ratio leaving empty space on the sides within that box). */
-.frame-snake {
-  /* <canvas> is a *replaced* element (like <img>) — unlike a plain div,
-     it doesn't auto-stretch to fill an inset box; width/height:auto falls
-     back to its own intrinsic size (300x150 before script.js's resize()
-     ever runs) instead. Explicit left/top/width/height sidesteps that:
-     percentages on all four resolve against the same containing block
-     (.portrait-stage) regardless of element type, so this is the same box
-     "inset: 10% 22.7%" would have produced on a non-replaced element. */
-  position: absolute;
-  left: 22.7%;
-  top: 10%;
-  width: 54.6%; /* 100% - 2 × 22.7% */
-  height: 80%; /* 100% - 2 × 10% */
-  pointer-events: none;
-}
+/* DEPRECATED — snake-game frame around the photo (its canvas and the
+   "Portrait: snake frame" block in script.js are disabled). Old rule:
+   .frame-snake { position: absolute; left: 22.7%; top: 10%; width: 54.6%;
+     height: 80%; pointer-events: none; }
+   (inset matched the contain-fit box of lian_photo.jpeg, 864x1266.) */
 
 #portrait {
   position: absolute;
@@ -849,4 +833,115 @@ a {
   .projects-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ---------- Wandering dogs (see script.js) ---------- */
+.wanderer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 64px;
+  z-index: 50;
+  cursor: pointer;
+  transition-property: transform;
+  transition-timing-function: ease-in-out;
+  user-select: none;
+}
+
+.wanderer img {
+  display: block;
+  width: 100%;
+  height: auto;
+  -webkit-user-drag: none;
+}
+
+/* the sprite is flipped by script.js via --flip; the label stays unflipped */
+.wanderer img {
+  transform: scaleX(var(--flip, 1));
+}
+
+.wanderer-name {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 3px 6px;
+  background: #222;
+  color: #fff;
+  font-family: "Press Start 2P", var(--font-mono), monospace;
+  font-size: 0.45rem;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  image-rendering: pixelated;
+}
+
+.wanderer:hover .wanderer-name,
+.wanderer:focus-visible .wanderer-name {
+  opacity: 1;
+}
+
+/* the bark bubble replaces the name label while it's showing */
+.wanderer.wanderer--bark .wanderer-name {
+  opacity: 0 !important; /* beats the :hover rule above, which is more specific */
+  transition: none;
+}
+
+.wanderer-bubble {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 6px;
+  background: #fff;
+  color: #222;
+  border: 2px solid #222;
+  font-family: "Press Start 2P", var(--font-mono), monospace;
+  font-size: 0.5rem;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+/* tail of the speech bubble */
+.wanderer-bubble::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-right: 2px solid #222;
+  border-bottom: 2px solid #222;
+  transform: translate(-50%, -3px) rotate(45deg);
+}
+
+.wanderer--bark .wanderer-bubble {
+  opacity: 1;
+}
+
+/* easter egg growl: angry red bubble */
+.wanderer--growl .wanderer-bubble {
+  color: #c0392b;
+  border-color: #c0392b;
+}
+
+.wanderer--growl .wanderer-bubble::after {
+  border-right-color: #c0392b;
+  border-bottom-color: #c0392b;
+}
+
+/* little step-bounce while walking toward the section being viewed */
+.wanderer--walking img {
+  animation: dog-step 0.5s steps(2, jump-none) infinite;
+}
+
+@keyframes dog-step {
+  from { translate: 0 0; }
+  to { translate: 0 -3px; }
 }
