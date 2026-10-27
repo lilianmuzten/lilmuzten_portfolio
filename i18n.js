@@ -22,8 +22,8 @@ const TRANSLATIONS = {
     "about-body": `
         Actualmente soy Ingeniera de Datos en
         <a href="https://www.wizeline.com/" target="_blank" rel="noopener" class="inline-link">Wizeline</a>,
-        donde construyo pipelines e infraestructura de datos para clientes como Dow Jones y
-        Kellogg's, sobre PySpark y AWS. Anteriormente trabajé en
+        donde construyo pipelines e infraestructura de datos para clientes como un proveedor global de noticias y
+        una empresa de la industria alimentaria, sobre PySpark y AWS. Anteriormente trabajé en
         <a href="https://www.indragroup.com/es/america-latina/mexico" target="_blank" rel="noopener" class="inline-link">Indra</a>,
         <a href="https://www.xaldigital.com/" target="_blank" rel="noopener" class="inline-link">XalDigital</a> e
         <a href="https://www.gob.mx/ineel" target="_blank" rel="noopener" class="inline-link">INEEL</a>,
@@ -35,6 +35,8 @@ const TRANSLATIONS = {
 
     "wizeline-role": "Ingeniera de Datos Senior",
     "wizeline-dates": "OCT 2021 — ACTUALIDAD · REMOTO",
+    "wizeline-client-news": "Proveedor global de noticias",
+    "wizeline-client-food": "industria alimentaria",
     "wizeline-dowjones-bullets": `
                 <li>Desarrollé reportes con PySpark aplicando lógica y reglas de negocio, desplegando los datos finales en tablas de Athena para su visualización.</li>
                 <li>Identifiqué, evalué e implementé mejoras de proceso, analizando su impacto en los resultados del proyecto.</li>
@@ -113,8 +115,8 @@ const TRANSLATIONS = {
     "about-body": `
         Je suis actuellement Ingénieure de Données chez
         <a href="https://www.wizeline.com/" target="_blank" rel="noopener" class="inline-link">Wizeline</a>,
-        où je construis des pipelines et une infrastructure de données pour des clients comme Dow Jones et
-        Kellogg's, sur PySpark et AWS. Auparavant, j'ai travaillé chez
+        où je construis des pipelines et une infrastructure de données pour des clients comme un fournisseur mondial d'actualités et
+        une entreprise de l'industrie alimentaire, sur PySpark et AWS. Auparavant, j'ai travaillé chez
         <a href="https://www.indragroup.com/es/america-latina/mexico" target="_blank" rel="noopener" class="inline-link">Indra</a>,
         <a href="https://www.xaldigital.com/" target="_blank" rel="noopener" class="inline-link">XalDigital</a> et
         <a href="https://www.gob.mx/ineel" target="_blank" rel="noopener" class="inline-link">INEEL</a>,
@@ -126,6 +128,8 @@ const TRANSLATIONS = {
 
     "wizeline-role": "Ingénieure de Données Senior",
     "wizeline-dates": "OCT 2021 — AUJOURD'HUI · À DISTANCE",
+    "wizeline-client-news": "Fournisseur mondial d'actualités",
+    "wizeline-client-food": "industrie alimentaire",
     "wizeline-dowjones-bullets": `
                 <li>Développé des rapports avec PySpark en appliquant la logique et les règles métier, en déployant les données finales dans des tables Athena pour la visualisation.</li>
                 <li>Identifié, évalué et mis en œuvre des améliorations de processus, en analysant leur impact sur les résultats du projet.</li>

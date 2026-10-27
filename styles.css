@@ -10,7 +10,7 @@
   --surface: #131c30;
   --surface-hover: #1a2540;
   --font-serif: "Libre Baskerville", Georgia, "Times New Roman", serif;
-  --font-mono: "NTR", "JetBrains Mono", "Fira Code", "Courier New", Courier, monospace;
+  --font-mono: "NTR", "Gudea", "JetBrains Mono", "Fira Code", "Courier New", Courier, monospace;
 }
 
 * {

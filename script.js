@@ -704,7 +704,8 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
       const from = d.y;
       window.clearTimeout(d.timer);
       d.y = rand(bandLo, bandHi);
-      const duration = Math.max(3, Math.abs(d.y - from) / 70); // walking pace
+      // walking pace, but capped so a long scroll never leaves a dog far behind
+      const duration = Math.min(4, Math.max(1.5, Math.abs(d.y - from) / 70));
       place(duration);
       el.style.transitionTimingFunction = "linear";
       el.classList.add("wanderer--walking");
@@ -737,12 +738,20 @@ function floodFillBackground(cols, rows, isCandidate, inBounds) {
     return d;
   });
 
+  // Follow while scrolling (throttled) as well as once it settles, so fast
+  // scrolls on desktop and touch flings on mobile don't leave the dogs behind.
   let scrollTimer = null;
+  let lastFollow = 0;
   window.addEventListener(
     "scroll",
     () => {
+      const now = Date.now();
+      if (now - lastFollow > 400) {
+        lastFollow = now;
+        pack.forEach((d) => d.follow());
+      }
       window.clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(() => pack.forEach((d) => d.follow()), 200);
+      scrollTimer = setTimeout(() => pack.forEach((d) => d.follow()), 150);
     },
     { passive: true }
   );
