@@ -81,7 +81,7 @@ const TRANSLATIONS = {
     "projects-heading": "Proyectos personales",
     "project1-desc": "Este sitio — un portafolio personal construido desde cero con un motor de retrato ASCII interactivo, sin framework y sin paso de build.",
     "project2-desc": "Trabajo en progreso.",
-    "project3-desc": "Trabajo en progreso.",
+    "project3-desc": "Un bot de Telegram para llevar los gastos compartidos en pareja — escribes una compra en lenguaje natural y un LLM local la extrae y categoriza, y la registra en Google Sheets.",
 
     "hobbies-heading": "Pasatiempos",
 
@@ -174,7 +174,7 @@ const TRANSLATIONS = {
     "projects-heading": "Projets personnels",
     "project1-desc": "Ce site — un portfolio personnel conçu de A à Z avec un moteur de portrait ASCII interactif, sans framework ni étape de build.",
     "project2-desc": "Travail en cours.",
-    "project3-desc": "Travail en cours.",
+    "project3-desc": "Un bot Telegram pour suivre les dépenses partagées en couple — on écrit un achat en langage naturel, un LLM local l\u2019extrait et le catégorise, puis l\u2019enregistre dans Google Sheets.",
 
     "hobbies-heading": "Loisirs",
 
